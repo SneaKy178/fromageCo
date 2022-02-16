@@ -18,13 +18,13 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-//    @PostMapping(path = "")
-//    public ResponseEntity<Client> createClient(@RequestBody Client client){
-//        return clientService
-//                .addClient(client)
-//                .map(client1 -> ResponseEntity.status(HttpStatus.CREATED).body(client1))
-//                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
-//    }
+    @PostMapping(path = "/client")
+    public ResponseEntity<Client> createClient(@RequestBody Client client){
+        return clientService
+                .addClient(client)
+                .map(client1 -> ResponseEntity.status(HttpStatus.CREATED).body(client1))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
 
     @GetMapping(path = "/clients")
     public ResponseEntity<List<Client>> getAllClients() {

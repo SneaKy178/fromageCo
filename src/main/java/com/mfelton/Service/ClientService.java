@@ -16,9 +16,9 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-//    public Optional<Client> addClient(Client client){
-//        return Optional.of(clientRepository.save(client));
-//    }
+    public Optional<Client> addClient(Client client){
+        return Optional.of(clientRepository.save(client));
+    }
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();

@@ -15,10 +15,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @ContextConfiguration(classes = ClientController.class)
 @WebMvcTest(ClientController.class)
@@ -35,6 +37,28 @@ public class ClientControllerTest {
     public ClientControllerTest() {
         this.mapper = new ObjectMapper().findAndRegisterModules();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    @Test
+    public void testAddEtudiant() throws Exception {
+        // Arrange
+        Client expected = getClient();
+        when(clientService.addClient(expected)).thenReturn(Optional.of(expected));
+
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                post("/client")
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualClient =
+                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(actualClient).isEqualTo(expected);
     }
 
     @Test

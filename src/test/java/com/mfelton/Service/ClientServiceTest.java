@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -21,6 +22,19 @@ public class ClientServiceTest {
 
     @InjectMocks
     private ClientService clientService;
+
+    @Test
+    public void testAddEtudiant() {
+        // Arrange
+        Client expected = getClient();
+        when(clientRepository.save(expected)).thenReturn(expected);
+
+        // Act
+        Optional<Client> returned = clientService.addClient(expected);
+
+        // Assert
+        assertThat(returned).isEqualTo(Optional.of(expected));
+    }
 
     @Test
     public void testGetAllClientsAllSession() {
