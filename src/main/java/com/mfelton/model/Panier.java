@@ -2,14 +2,13 @@ package com.mfelton.model;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
+@Entity
 @Data
-public class Panier {
+public class Panier implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +20,12 @@ public class Panier {
 
     @OneToMany
     protected List<Fromage> listeFromages;
+
+    public Panier(){}
+    public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes, List<Fromage> listeFromages) {
+        this.nbrFromage = nbrFromage;
+        this.prixTotalAvantTaxes = prixTotalAvantTaxes;
+        this.prixTotalApresTaxes = prixTotalApresTaxes;
+        this.listeFromages = listeFromages;
+    }
 }
