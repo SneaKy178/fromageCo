@@ -2,12 +2,10 @@ package com.mfelton.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +22,9 @@ public class Paiements implements Serializable {
     private int cvv;
     private String codePostale;
 
+    @ManyToOne
+    private Panier panier;
+
     public Paiements(){}
 
     public Paiements(String marque, int numCarte, LocalDate dateExpiration, String detenteurCarte, int cvv, String codePostale) {
@@ -33,5 +34,9 @@ public class Paiements implements Serializable {
         this.detenteurCarte = detenteurCarte;
         this.cvv = cvv;
         this.codePostale = codePostale;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
     }
 }

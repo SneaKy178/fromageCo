@@ -18,8 +18,6 @@ public class Client extends User implements Serializable {
     private String province;
     private String ville;
 
-    @OneToOne
-    private Panier panier;
 
     @OneToMany
     private List<Paiements> listPaiements;
