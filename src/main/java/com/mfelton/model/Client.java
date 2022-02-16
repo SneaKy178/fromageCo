@@ -1,25 +1,19 @@
 package com.mfelton.model;
 
 import lombok.Data;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
 @Data
-public class Client {
+public class Client extends User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
 
     protected String adresse;
     protected String numTelephone;
     protected String province;
     protected String ville;
 
-    public Client(int id, String adresse, String numTelephone, String province, String ville) {
-        this.id = id;
+    public Client(String prenom, String nom, String courriel, String password, String adresse, String numTelephone, String province, String ville) {
+        super(prenom,nom,courriel,password);
         this.adresse = adresse;
         this.numTelephone = numTelephone;
         this.province = province;

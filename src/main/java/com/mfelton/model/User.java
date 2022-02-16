@@ -5,10 +5,13 @@ import lombok.Data;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.LocalDate;
 
+@MappedSuperclass
 @Data
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +27,11 @@ public class User {
         dateCreation = LocalDate.now();
     }
 
-    public User(int id, String prenom, String nom, String courriel, String password, LocalDate dateCreation) {
-        this.id = id;
+    public User(String prenom, String nom, String courriel, String password) {
         this.prenom = prenom;
         this.nom = nom;
         this.courriel = courriel;
         this.password = password;
-        this.dateCreation = dateCreation;
+        this.dateCreation = LocalDate.now();
     }
 }

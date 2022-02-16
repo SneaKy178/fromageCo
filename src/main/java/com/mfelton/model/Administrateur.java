@@ -2,16 +2,15 @@ package com.mfelton.model;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
 @Data
-public class Administrateur {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+public class Administrateur extends User implements Serializable {
 
     protected String role;
+
+    public Administrateur(String prenom, String nom, String courriel, String password, String role) {
+        super(prenom,nom,courriel,password);
+        this.role = role;
+    }
 }
