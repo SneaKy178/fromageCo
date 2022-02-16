@@ -21,11 +21,18 @@ public class Panier implements Serializable {
     @OneToMany
     private List<Fromage> listeFromages;
 
+    @OneToOne
+    private Paiements paiements;
+
     public Panier(){}
     public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes, List<Fromage> listeFromages) {
         this.nbrFromage = nbrFromage;
         this.prixTotalAvantTaxes = prixTotalAvantTaxes;
         this.prixTotalApresTaxes = prixTotalApresTaxes;
         this.listeFromages = listeFromages;
+    }
+
+    public void setPaiements(Paiements paiements) {
+        this.paiements = paiements;
     }
 }
