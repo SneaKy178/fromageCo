@@ -14,12 +14,12 @@ public class Fromage implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    private int id;
 
-    protected String nom;
-    protected int prix;
-    protected int vieillese;
-    protected int quantite;
+    private String nom;
+    private int prix;
+    private int vieillese;
+    private int quantite;
 
     public Fromage(){}
 

@@ -12,14 +12,14 @@ public class Panier implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    private int id;
 
-    protected int nbrFromage;
-    protected double prixTotalAvantTaxes;
-    protected double prixTotalApresTaxes;
+    private int nbrFromage;
+    private double prixTotalAvantTaxes;
+    private double prixTotalApresTaxes;
 
     @OneToMany
-    protected List<Fromage> listeFromages;
+    private List<Fromage> listeFromages;
 
     public Panier(){}
     public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes, List<Fromage> listeFromages) {

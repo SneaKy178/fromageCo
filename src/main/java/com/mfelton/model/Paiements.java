@@ -15,14 +15,14 @@ public class Paiements implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    private int id;
 
-    protected String marque;
-    protected int numCarte;
-    protected LocalDate dateExpiration;
-    protected String detenteurCarte;
-    protected int cvv;
-    protected String codePostale;
+    private String marque;
+    private int numCarte;
+    private LocalDate dateExpiration;
+    private String detenteurCarte;
+    private int cvv;
+    private String codePostale;
 
     public Paiements(){}
 

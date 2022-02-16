@@ -10,10 +10,10 @@ import java.io.Serializable;
 public class Client extends User implements Serializable {
 
 
-    protected String adresse;
-    protected String numTelephone;
-    protected String province;
-    protected String ville;
+    private String adresse;
+    private String numTelephone;
+    private String province;
+    private String ville;
 
     public Client(){}
 
