@@ -2,6 +2,7 @@ package com.mfelton.Service;
 
 import com.mfelton.Repository.ClientRepository;
 import com.mfelton.model.Client;
+import com.mfelton.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class ClientService {
     public Optional<Client> addClient(Client client){
         return Optional.of(clientRepository.save(client));
     }
+
+    public Optional<Client> login(String email, String pwd) {
+            return Optional.of(
+                    clientRepository.findClientByCourrielIgnoreCaseAndPassword(email, pwd));
+    }
+
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();

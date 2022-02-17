@@ -9,5 +9,5 @@ public interface ClientRepository extends JpaRepository<Client,Integer> {
 
     Client findClientById(int id);
 
-    Client findClientByCourrielIgnoreCase(String courriel);
+    Client findClientByCourrielIgnoreCaseAndPassword(String courriel, String pwd);
 }
