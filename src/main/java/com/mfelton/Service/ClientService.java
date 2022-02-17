@@ -22,10 +22,12 @@ public class ClientService {
     }
 
     public Optional<Client> login(String email, String pwd) {
-            return Optional.of(
-                    clientRepository.findClientByCourrielIgnoreCaseAndPassword(email, pwd));
+            return Optional.of(clientRepository.findClientByCourrielIgnoreCaseAndPassword(email, pwd));
     }
 
+    public Optional<Client> findClientByCourriel(String email) {
+            return Optional.of(clientRepository.findClientByCourrielIgnoreCase(email));
+    }
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();

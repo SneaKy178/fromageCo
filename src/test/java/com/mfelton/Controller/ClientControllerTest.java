@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,7 +41,7 @@ public class ClientControllerTest {
     }
 
     @Test
-    public void testAddEtudiant() throws Exception {
+    public void testAddClient() throws Exception {
         // Arrange
         Client expected = getClient();
         when(clientService.addClient(expected)).thenReturn(Optional.of(expected));
@@ -62,7 +63,7 @@ public class ClientControllerTest {
     }
 
     @Test
-    void testGetAllEtudiants() throws Exception {
+    void testGetAllClient() throws Exception {
         // Arrange
         List<Client> expected = getClients();
         when(clientService.getAllClients()).thenReturn(expected);
@@ -83,12 +84,35 @@ public class ClientControllerTest {
     }
 
     @Test
-    void testLoginEtudiant() throws Exception {
+    void testLoginClient() throws Exception {
         // Arrange
         Client expected = getClient();
         when(clientService.login(expected.getCourriel(), expected.getPassword()))
                 .thenReturn(Optional.of(expected));
         String url = "/client/" + expected.getCourriel() + "/" + expected.getPassword();
+
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                get(url)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualClient =
+                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(actualClient).isEqualTo(expected);
+    }
+
+    @Test
+    void testFindClientByEmail() throws Exception {
+        // Arrange
+        Client expected = getClient();
+        when(clientService.findClientByCourriel(any(String.class))).thenReturn(Optional.of(expected));
+        String url = "/client/" + expected.getCourriel();
 
         // Act
         MvcResult result =

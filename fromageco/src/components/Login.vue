@@ -14,7 +14,12 @@
 
 <script>
 import Swal from "sweetalert2";
+import global from "./global";
 export default {
+    setup() {
+    const { state } = global;
+    return { state };
+  },
   data() {
     return {
       courriel: "",
@@ -39,9 +44,9 @@ export default {
         })
         .then((data) => {
           console.log(data, "Objet de retour data");
-          // this.state.courriel = data.courriel;
-          // this.state.role = data.role;
-          // this.state.isLoggedIn = true;
+          this.state.courriel = data.courriel;
+          this.state.role = data.role;
+          this.state.isLoggedIn = true;
           this.$router.push("/accountDetails");
         });
     },

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import FormClient from '../components/FormClient.vue'
 import Login from '../components/Login.vue'
+import AccountDetails from '../components/AccountDetails.vue'
 
 const routes = [
   {
@@ -8,9 +9,19 @@ const routes = [
     component: Login
   },
   {
+    path:"/login",
+    component: Login
+  },
+  {
     path:"/form",
     component: FormClient
+  },
+  {
+    path:"/accountDetails",
+    component: AccountDetails
   }
+
+  
 ];
 
 const router = createRouter({

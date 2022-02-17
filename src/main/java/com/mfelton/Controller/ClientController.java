@@ -33,12 +33,20 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }
 
-    @GetMapping("client/{email}/{password}")
+    @GetMapping("/client/{email}/{password}")
     public ResponseEntity<Client> login(
             @PathVariable("email") String email, @PathVariable("password") String password) {
         return clientService
                 .login(email, password)
                 .map(etudiant1 -> ResponseEntity.status(HttpStatus.OK).body(etudiant1))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    }
+
+    @GetMapping("/client/{email}")
+    public ResponseEntity<Client> findUserByEmail(@PathVariable("email") String email) {
+        return clientService
+                .findClientByCourriel(email)
+                .map(user1 -> ResponseEntity.status(HttpStatus.OK).body(user1))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 }

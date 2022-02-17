@@ -1,10 +1,10 @@
 package com.mfelton.model;
 
+import com.mfelton.Enums.UserRole;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,10 +22,12 @@ public class Client extends User implements Serializable {
     @OneToMany
     private List<Paiements> listPaiements;
 
-    public Client(){}
+    public Client(){
+        role = UserRole.CLIENT;
+    }
 
     public Client(String prenom, String nom, String courriel, String password, String adresse, String numTelephone, String province, String ville) {
-        super(prenom,nom,courriel,password);
+        super(prenom,nom,courriel,password, UserRole.CLIENT);
         this.adresse = adresse;
         this.numTelephone = numTelephone;
         this.province = province;

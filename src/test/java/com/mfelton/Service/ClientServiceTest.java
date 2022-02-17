@@ -66,6 +66,20 @@ public class ClientServiceTest {
         assertThat(returned).isEqualTo(Optional.of(expected));
     }
 
+    @Test
+    public void testFindClientByEmail() {
+        // Arrange
+        Client expected = getClient();
+        when(clientRepository.findClientByCourrielIgnoreCase(expected.getCourriel()))
+                .thenReturn(expected);
+
+        // Act
+        Optional<Client> returned = clientService.findClientByCourriel(expected.getCourriel());
+
+        // Assert
+        assertThat(returned).isEqualTo(Optional.of(expected));
+    }
+
 
 
     private Client getClient() {
