@@ -44,7 +44,7 @@
       </div>
 
       <div class="submit">
-        <button>Créez votre compte étudiant</button>
+        <button>Créez votre compte client</button>
       </div>
     </form>
   </body>
@@ -103,7 +103,7 @@ export default {
         });
 
         request.send(client);
-        // this.$router.push("/login");
+        this.$router.push("/login");
       }
     },
   },

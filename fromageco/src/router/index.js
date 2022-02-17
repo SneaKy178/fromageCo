@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import FormClient from '../components/FormClient.vue'
+import Login from '../components/Login.vue'
 
 const routes = [
   {
     path:"/",
+    component: Login
+  },
+  {
+    path:"/form",
     component: FormClient
   }
 ];
