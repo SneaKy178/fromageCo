@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import FormClient from '../components/FormClient.vue'
 import Login from '../components/Login.vue'
 import AccountDetails from '../components/AccountDetails.vue'
+import Items from '../components/Items.vue'
 
 const routes = [
   {
@@ -19,7 +20,12 @@ const routes = [
   {
     path:"/accountDetails",
     component: AccountDetails
+  },
+  {
+    path:"/items",
+    component: Items
   }
+
 
   
 ];
