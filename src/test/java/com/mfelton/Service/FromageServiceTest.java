@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Base64;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +41,7 @@ public class FromageServiceTest {
     }
 
     private Fromage getFromage() {
-        return new Fromage("Chevre",12.95,10,100,"test");
+        return new Fromage("Chevre",12.95,10,100,Base64.getDecoder().decode("test"));
     }
 
     private List<Fromage> getFromages() {

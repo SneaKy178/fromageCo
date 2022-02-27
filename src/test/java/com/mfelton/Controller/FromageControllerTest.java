@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.Base64;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,7 +62,7 @@ public class FromageControllerTest {
     }
 
     private Fromage getFromage() {
-        return new Fromage("Chevre",12.95,10,100,"test");
+        return new Fromage("Chevre",12.95,10,100, Base64.getDecoder().decode("test"));
     }
 
     private List<Fromage> getFromages() {
