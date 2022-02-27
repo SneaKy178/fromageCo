@@ -37,7 +37,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void testGetAllClientsAllSession() {
+    public void testGetAllClients() {
         // Arrange
         List<Client> expected =
                 getClients();

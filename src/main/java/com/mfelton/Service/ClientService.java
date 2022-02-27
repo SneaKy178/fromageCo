@@ -2,7 +2,6 @@ package com.mfelton.Service;
 
 import com.mfelton.Repository.ClientRepository;
 import com.mfelton.model.Client;
-import com.mfelton.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
