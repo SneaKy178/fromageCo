@@ -15,19 +15,19 @@ public class Fromage implements Serializable {
 
     private String nom;
     private double prix;
-    private int vieillesse;
-    private int quantite;
+    private String description;
+    private int quantiteDisponible;
 
     @Lob
     private byte[] data;
 
     public Fromage(){}
 
-    public Fromage(String nom, double prix, int vieillesse, int quantite, byte[] data) {
+    public Fromage(String nom, double prix, String description, int quantiteDisponible, byte[] data) {
         this.nom = nom;
         this.prix = prix;
-        this.vieillesse = vieillesse;
-        this.quantite = quantite;
+        this.description = description;
+        this.quantiteDisponible = quantiteDisponible;
         this.data = data;
     }
 }

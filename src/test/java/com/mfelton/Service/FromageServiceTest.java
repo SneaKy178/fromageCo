@@ -41,7 +41,7 @@ public class FromageServiceTest {
     }
 
     private Fromage getFromage() {
-        return new Fromage("Chevre",12.95,10,100,Base64.getDecoder().decode("test"));
+        return new Fromage("Chevre",12.95,"test",100,Base64.getDecoder().decode("test"));
     }
 
     private List<Fromage> getFromages() {

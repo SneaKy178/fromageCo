@@ -1,9 +1,7 @@
 <template>
-  
-          
-      
+  <div class="row">
   <div class="card-group">
-    <div v-for="fromage in fromages" v-bind:key="fromage">
+    <div class="col-4" v-for="fromage in fromages" v-bind:key="fromage">
     <div class="card">
       <img
         class="card-img-top"
@@ -27,6 +25,7 @@
         /></small>
       </div>
     </div>
+  </div>
   </div>
   </div>
 </template>
@@ -61,5 +60,10 @@ export default {
 <style scoped>
 input[type="number"] {
   float: right;
+}
+
+img {
+  height: 500px;
+  width: 500px;
 }
 </style>
