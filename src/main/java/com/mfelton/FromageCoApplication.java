@@ -54,6 +54,7 @@ public class FromageCoApplication implements CommandLineRunner {
         fromageRepository.saveAll(List.of(fromage1,fromage2,fromage3,fromage4,fromage5,fromage6));
 
 
+
         Panier panier = new Panier(2   ,9,10.35,List.of(fromage1,fromage2));
 
         Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier);

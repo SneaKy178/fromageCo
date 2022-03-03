@@ -3,8 +3,10 @@ package com.mfelton.Controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mfelton.Service.ClientService;
+import com.mfelton.Service.PaiementService;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,96 +28,72 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@ContextConfiguration(classes = ClientController.class)
-@WebMvcTest(ClientController.class)
-public class ClientControllerTest {
+@ContextConfiguration(classes = PaiementController.class)
+@WebMvcTest(PaiementController.class)
+public class PaiementControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ClientService clientService;
+    private PaiementService paiementService;
 
     private final ObjectMapper mapper;
 
-    public ClientControllerTest() {
+    public PaiementControllerTest() {
         this.mapper = new ObjectMapper().findAndRegisterModules();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Test
-    public void testAddClient() throws Exception {
+    public void testAddPaiement() throws Exception {
         // Arrange
-        Client expected = getClient();
-        when(clientService.addClient(expected)).thenReturn(Optional.of(expected));
+        Paiement expected = getPaiement();
+        when(paiementService.addPaiement(expected)).thenReturn(Optional.of(expected));
 
         // Act
         MvcResult result =
                 mockMvc
                         .perform(
-                                post("/client")
+                                post("/paiement")
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .content(mapper.writeValueAsString(expected)))
                         .andReturn();
 
         // Assert
-        var actualClient =
-                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        var actualPaiement =
+                mapper.readValue(result.getResponse().getContentAsString(), Paiement.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(actualClient).isEqualTo(expected);
+        assertThat(actualPaiement).isEqualTo(expected);
     }
 
     @Test
-    void testGetAllClients() throws Exception {
+    void testGetAllPaiements() throws Exception {
         // Arrange
-        List<Client> expected = getClients();
-        when(clientService.getAllClients()).thenReturn(expected);
+        List<Paiement> expected = getPaiements();
+        when(paiementService.getAllPaiements()).thenReturn(expected);
 
         // Act
         MvcResult result =
                 mockMvc
                         .perform(
-                                get("/clients")
+                                get("/paiements")
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .content(mapper.writeValueAsString(expected)))
                         .andReturn();
 
         // Assert
-        var actualClients = mapper.readValue(result.getResponse().getContentAsString(), List.class);
+        var actualPaiements = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualClients.size()).isEqualTo(expected.size());
+        assertThat(actualPaiements.size()).isEqualTo(expected.size());
     }
 
     @Test
-    void testLoginClient() throws Exception {
+    void testFindPaiementByClientCourriel() throws Exception {
         // Arrange
-        Client expected = getClient();
-        when(clientService.login(expected.getCourriel(), expected.getPassword()))
-                .thenReturn(Optional.of(expected));
-        String url = "/client/" + expected.getCourriel() + "/" + expected.getPassword();
-
-        // Act
-        MvcResult result =
-                mockMvc
-                        .perform(
-                                get(url)
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(mapper.writeValueAsString(expected)))
-                        .andReturn();
-
-        // Assert
-        var actualClient =
-                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
-        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualClient).isEqualTo(expected);
-    }
-
-    @Test
-    void testFindClientByEmail() throws Exception {
-        // Arrange
-        Client expected = getClient();
-        when(clientService.findClientByCourriel(any(String.class))).thenReturn(Optional.of(expected));
-        String url = "/client/" + expected.getCourriel();
+        Paiement expected = getPaiement();
+        when(paiementService.findPaiementByCourriel(any(String.class))).thenReturn(Optional.of(expected));
+        String url = "/paiement/" + expected.getClient().getCourriel();
 
         // Act
         MvcResult result =
@@ -127,10 +105,10 @@ public class ClientControllerTest {
                         .andReturn();
 
         // Assert
-        var actualClient =
-                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        var actualPaiement =
+                mapper.readValue(result.getResponse().getContentAsString(), Paiement.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualClient).isEqualTo(expected);
+        assertThat(actualPaiement).isEqualTo(expected);
     }
 
 
@@ -149,8 +127,11 @@ public class ClientControllerTest {
         return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
     }
 
-    private List<Client> getClients(){
-        return List.of(getClient(),getClient(),getClient());
+    private Paiement getPaiement() {
+        return new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",getClient());
     }
 
+    private List<Paiement> getPaiements() {
+        return List.of(getPaiement(),getPaiement(),getPaiement());
+    }
 }

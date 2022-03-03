@@ -1,8 +1,9 @@
 package com.mfelton.Service;
 
-import com.mfelton.Repository.ClientRepository;
+import com.mfelton.Repository.PaiementRepository;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,36 +19,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ClientServiceTest {
+public class PaiementServiceTest {
 
     @Mock
-    private ClientRepository clientRepository;
+    private PaiementRepository paiementRepository;
 
     @InjectMocks
-    private ClientService clientService;
+    private PaiementService paiementService;
 
     @Test
-    public void testAddClient() {
+    public void testAddPaiement() {
         // Arrange
-        Client expected = getClient();
-        when(clientRepository.save(expected)).thenReturn(expected);
+        Paiement expected = getPaiement();
+        when(paiementRepository.save(expected)).thenReturn(expected);
 
         // Act
-        Optional<Client> returned = clientService.addClient(expected);
+        Optional<Paiement> returned = paiementService.addPaiement(expected);
 
         // Assert
         assertThat(returned).isEqualTo(Optional.of(expected));
     }
 
     @Test
-    public void testGetAllClients() {
+    public void testGetAllPaiements() {
         // Arrange
-        List<Client> expected =
-                getClients();
-        when(clientRepository.findAll()).thenReturn(expected);
+        List<Paiement> expected =
+                getPaiements();
+        when(paiementRepository.findAll()).thenReturn(expected);
 
         // Act
-        List<Client> returned = clientService.getAllClients();
+        List<Paiement> returned = paiementService.getAllPaiements();
 
         // Assert
         assertThat(returned)
@@ -55,38 +56,18 @@ public class ClientServiceTest {
     }
 
     @Test
-    public void testLoginClient() {
+    public void testFindPaiementByClientEmail() {
         // Arrange
-        Client expected = getClient();
-        when(clientRepository.findClientByCourrielIgnoreCaseAndPassword(
-                expected.getCourriel(), expected.getPassword()))
+        Paiement expected = getPaiement();
+        when(paiementRepository.findPaiementByClientCourriel(expected.getClient().getCourriel()))
                 .thenReturn(expected);
 
         // Act
-        Optional<Client> returned = clientService.login(expected.getCourriel(), expected.getPassword());
+        Optional<Paiement> returned = paiementService.findPaiementByCourriel(expected.getClient().getCourriel());
 
         // Assert
         assertThat(returned).isEqualTo(Optional.of(expected));
     }
-
-    @Test
-    public void testFindClientByEmail() {
-        // Arrange
-        Client expected = getClient();
-        when(clientRepository.findClientByCourrielIgnoreCase(expected.getCourriel()))
-                .thenReturn(expected);
-
-        // Act
-        Optional<Client> returned = clientService.findClientByCourriel(expected.getCourriel());
-
-        // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
-    }
-
-
-
-
-
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
@@ -102,7 +83,14 @@ public class ClientServiceTest {
         return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
     }
 
-    private List<Client> getClients(){
-        return List.of(getClient(),getClient(),getClient());
+    private Paiement getPaiement() {
+        return new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",getClient());
     }
+
+    private List<Paiement> getPaiements() {
+        return List.of(getPaiement(),getPaiement(),getPaiement());
+    }
+
+
+
 }
