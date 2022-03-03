@@ -5,6 +5,7 @@ import AccountDetails from '../components/AccountDetails.vue'
 import Items from '../components/Items.vue'
 import Panier from '../components/Panier.vue'
 import PleaseLogin from '../components/PleaseLogin.vue'
+import Paiement from '../components/Paiement.vue'
 
 const routes = [
   {
@@ -34,6 +35,10 @@ const routes = [
   {
     path:"/pleaseLogin",
     component: PleaseLogin
+  },
+  {
+    path:"/paiement",
+    component: Paiement
   }
 
 

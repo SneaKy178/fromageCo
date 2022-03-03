@@ -2,7 +2,10 @@
   <header>
     <Navbar/>
   </header>
-  <router-view />
+  <body>
+    <router-view />
+  </body>
+  
 </template>
 
 <style>
@@ -17,4 +20,5 @@ export default {
   }
 };
 </script>
+
 

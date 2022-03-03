@@ -23,7 +23,7 @@ public class Client extends User implements Serializable {
 
 
     @OneToMany
-    private List<Paiements> listPaiements;
+    private List<Paiement> listPaiements;
 
     @OneToOne(cascade= CascadeType.ALL)
     private Panier panier;

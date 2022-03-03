@@ -2,16 +2,17 @@ package com.mfelton;
 
 import com.mfelton.Repository.ClientRepository;
 import com.mfelton.Repository.FromageRepository;
+import com.mfelton.Repository.PaiementRepository;
 import com.mfelton.Repository.PanierRepository;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Base64;
-import java.util.Collections;
 import java.util.List;
 
 @SpringBootApplication
@@ -20,11 +21,13 @@ public class FromageCoApplication implements CommandLineRunner {
     private final ClientRepository clientRepository;
     private final FromageRepository fromageRepository;
     private final PanierRepository panierRepository;
+    private final PaiementRepository paiementRepository;
 
-    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository, PanierRepository panierRepository) {
+    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository, PanierRepository panierRepository, PaiementRepository paiementRepository) {
         this.clientRepository = clientRepository;
         this.fromageRepository = fromageRepository;
         this.panierRepository = panierRepository;
+        this.paiementRepository = paiementRepository;
     }
 
     public static void main(String[] args) {
@@ -51,10 +54,12 @@ public class FromageCoApplication implements CommandLineRunner {
         fromageRepository.saveAll(List.of(fromage1,fromage2,fromage3,fromage4,fromage5,fromage6));
 
 
-        Panier panier1 = new Panier(2,9,10.35,List.of(fromage1,fromage2));
+        Panier panier = new Panier(2   ,9,10.35,List.of(fromage1,fromage2));
 
-        Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier1);
+        Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier);
         clientRepository.save(client);
 
+        Paiement paiement = new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",client);
+        paiementRepository.save(paiement);
     }
 }

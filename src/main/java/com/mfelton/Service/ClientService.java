@@ -20,6 +20,10 @@ public class ClientService {
         return Optional.of(clientRepository.save(client));
     }
 
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
+
     public Optional<Client> login(String email, String pwd) {
             return Optional.of(clientRepository.findClientByCourrielIgnoreCaseAndPassword(email, pwd));
     }
@@ -28,7 +32,5 @@ public class ClientService {
             return Optional.of(clientRepository.findClientByCourrielIgnoreCase(email));
     }
 
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
-    }
+
 }
