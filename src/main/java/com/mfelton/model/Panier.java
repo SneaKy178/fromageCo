@@ -27,11 +27,12 @@ public class Panier implements Serializable {
 
 
     public Panier(){}
-    public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes, List<Fromage> listeFromages) {
+    public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes,Client client, List<Fromage> listeFromages) {
         this.nbrFromage = nbrFromage;
         this.prixTotalAvantTaxes = prixTotalAvantTaxes;
         this.prixTotalApresTaxes = prixTotalApresTaxes;
         this.listeFromages = listeFromages;
+        this.client = client;
     }
 
 }

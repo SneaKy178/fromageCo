@@ -2,8 +2,10 @@ package com.mfelton;
 
 import com.mfelton.Repository.ClientRepository;
 import com.mfelton.Repository.FromageRepository;
+import com.mfelton.Repository.PanierRepository;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Panier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +18,12 @@ public class FromageCoApplication implements CommandLineRunner {
 
     private final ClientRepository clientRepository;
     private final FromageRepository fromageRepository;
+    private final PanierRepository panierRepository;
 
-    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository) {
+    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository, PanierRepository panierRepository) {
         this.clientRepository = clientRepository;
         this.fromageRepository = fromageRepository;
+        this.panierRepository = panierRepository;
     }
 
     public static void main(String[] args) {
@@ -45,5 +49,8 @@ public class FromageCoApplication implements CommandLineRunner {
         Fromage fromage5 = new Fromage("Caviar d'quitaine perlita - 30g",95.88,"Le Caviar Perlita offre des grains remarquables !",5,caviar);
         Fromage fromage6 = new Fromage("Salat tradition - 1kg",59.90," Inspiré par le Salers tradition, avec un lait 100% d'origine Salers",13,salat);
         fromageRepository.saveAll(List.of(fromage1,fromage2,fromage3,fromage4,fromage5,fromage6));
+
+        Panier panier1 = new Panier(0,0,0,client,List.of(fromage1,fromage2));
+        panierRepository.save(panier1);
     }
 }

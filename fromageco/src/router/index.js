@@ -3,6 +3,7 @@ import FormClient from '../components/FormClient.vue'
 import Login from '../components/Login.vue'
 import AccountDetails from '../components/AccountDetails.vue'
 import Items from '../components/Items.vue'
+import Panier from '../components/Panier.vue'
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
   {
     path:"/items",
     component: Items
+  },
+  {
+    path:"/panier",
+    component: Panier
   }
 
 

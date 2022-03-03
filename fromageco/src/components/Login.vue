@@ -47,7 +47,7 @@ export default {
           this.state.courriel = data.courriel;
           this.state.role = data.role;
           this.state.isLoggedIn = true;
-          this.$router.push("/accountDetails");
+          this.$router.push("/panier");
         });
     },
   },
