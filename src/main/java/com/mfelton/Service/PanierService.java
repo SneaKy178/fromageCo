@@ -24,7 +24,4 @@ public class PanierService {
         return panierRepository.findAll();
     }
 
-    public Optional<Panier> findClienById(int id) {
-        return Optional.of(panierRepository.findPanierByClientId(id));
-    }
 }

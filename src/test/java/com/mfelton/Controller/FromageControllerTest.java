@@ -2,6 +2,7 @@ package com.mfelton.Controller;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mfelton.Repository.FromageRepository;
 import com.mfelton.Service.ClientService;
 import com.mfelton.Service.FromageService;
 import com.mfelton.model.Client;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,8 +29,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebMvcTest(FromageController.class)
 public class FromageControllerTest {
 
+
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private FromageRepository fromageRepository;
 
     @MockBean
     private FromageService fromageService;
@@ -56,10 +62,11 @@ public class FromageControllerTest {
                         .andReturn();
 
         // Assert
-        var actualFromages = mapper.readValue(result.getResponse().getContentAsString(), List.class);
+        var actualFromage = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualFromages.size()).isEqualTo(expected.size());
+        assertThat(actualFromage.size()).isEqualTo(expected.size());
     }
+
 
     private Fromage getFromage() {
         return new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
@@ -68,5 +75,4 @@ public class FromageControllerTest {
     private List<Fromage> getFromages() {
         return List.of(getFromage(),getFromage(),getFromage());
     }
-
 }

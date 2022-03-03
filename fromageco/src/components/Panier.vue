@@ -1,11 +1,45 @@
 <template>
-
+  <div v-if="state.isLoggedIn && state.role == 'CLIENT'">
+  <table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Prix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="fromage in listFromage" v-bind:key="fromage">
+      <td>{{fromage.nom}}</td>
+      <td>{{fromage.description}}</td>
+      <td>{{fromage.prix}}$</td>
+    </tr>
+    <tr>
+      <th>Nombre total</th>
+      <th>Prix avant taxes</th>
+      <th>Prix après taxes</th>
+    </tr>
+    <tr>
+      <th>{{panier.nbrFromage}}</th>
+      <th>{{panier.prixTotalAvantTaxes}}$</th>
+      <th>{{panier.prixTotalApresTaxes}}$</th>
+    </tr>
+  </tbody>
+</table>
+  </div>
+  <div v-else>
+    <PleaseLogin/>
+  </div>
 </template>
 
 <script>
+import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
+  components: {
+    PleaseLogin
+  },
   setup() {
     const { state } = global;
     const fullUser = ref({});
@@ -22,30 +56,18 @@ export default {
         .then((res) => {
           return res.json();
         })
-        .then(async(data) => {
-          this.fullUser = data;
-          await this.fetchPanier();
-        });
-    },
-    fetchPanier() {
-        fetch(`http://localhost:9191/panier/${this.fullUser.id}`)
-        .then((res) => {
-          return res.json();
-        })
         .then((data) => {
-          this.panier = data;
-          this.listFromage =  data.listeFromages;
-          console.log(data,"panier")
-          console.log(data.listeFromages,"fromages")
-        });
-    },
-    login() {
-      this.$router.push("/login");
+          this.fullUser = data;
+          this.panier = data.panier
+          this.listFromage = data.panier.listeFromages
+      });
     },
   },
 };
 </script>
 
 <style scoped>
-
+table {
+  text-align: center;
+}
 </style>

@@ -32,11 +32,4 @@ public class PanierController {
         return new ResponseEntity<>(panierService.getAllPaniers(), HttpStatus.OK);
     }
 
-    @GetMapping("/panier/{id}")
-    public ResponseEntity<Panier> findPanierByClientId(@PathVariable("id") int id) {
-        return panierService
-                .findClienById(id)
-                .map(user1 -> ResponseEntity.status(HttpStatus.OK).body(user1))
-                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
-    }
 }

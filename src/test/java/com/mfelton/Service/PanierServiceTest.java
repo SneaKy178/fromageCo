@@ -54,21 +54,6 @@ public class PanierServiceTest {
                 .hasSize(3);
     }
 
-    @Test
-    public void testFindPanierByClientId() {
-        // Arrange
-        Panier expected = getPanier();
-        when(panierRepository.findPanierByClientId(expected.getId()))
-                .thenReturn(expected);
-
-        // Act
-        Optional<Panier> returned = panierService.findClienById(expected.getId());
-
-        // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
-    }
-
-    Client client = new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal");
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
@@ -77,8 +62,11 @@ public class PanierServiceTest {
     }
 
     private Panier getPanier() {
-        return new Panier(0,0,0,client,getFromages());
+        return new Panier(0,0,0,getFromages());
     }
+
+    Client client = new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
+
 
     private List<Panier> getPaniers() {
         return List.of(getPanier(),getPanier(),getPanier());

@@ -4,6 +4,7 @@ import Login from '../components/Login.vue'
 import AccountDetails from '../components/AccountDetails.vue'
 import Items from '../components/Items.vue'
 import Panier from '../components/Panier.vue'
+import PleaseLogin from '../components/PleaseLogin.vue'
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
   {
     path:"/panier",
     component: Panier
+  },
+  {
+    path:"/pleaseLogin",
+    component: PleaseLogin
   }
 
 

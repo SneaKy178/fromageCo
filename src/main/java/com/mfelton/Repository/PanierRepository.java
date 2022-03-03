@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PanierRepository extends JpaRepository<Panier,Integer> {
 
-    Panier findPanierByClientId(int id);
 
 }

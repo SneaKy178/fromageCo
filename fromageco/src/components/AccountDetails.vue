@@ -34,16 +34,19 @@
       </div>
     </form>
   </div>
-  <div v-else class="center">
-    <h1>Veuillez vous conneter</h1>
-    <button @click="login">Login</button><br />
+  <div v-else>
+    <PleaseLogin/>
   </div>
 </template>
 
 <script>
+import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
+  components: {
+    PleaseLogin
+  },
   setup() {
     const { state } = global;
     const fullUser = ref({});
@@ -65,9 +68,6 @@ export default {
           this.fullUser = data;
           console.log(this.fullUser, "fulluser");
         });
-    },
-    login() {
-      this.$router.push("/login");
     },
   },
 };
@@ -120,42 +120,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-button {
-  background: #0b6dff;
-  border: 0;
-  padding: 10px 20px;
-  margin-top: 20px;
-  color: white;
-  border-radius: 20px;
-  font-size: 16px;
-}
-.submit {
-  text-align: center;
-}
 
-.error {
-  color: #ff0062;
-  margin-top: 10px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
 
-button {
-  background: #0b6dff;
-  border: 0;
-  padding: 10px 20px;
-  margin-top: 20px;
-  color: white;
-  border-radius: 20px;
-  font-size: 16px;
-}
-
-.center {
-  margin-top: 50px;
-  text-align: center;
-  width: 400px;
-  left: 50%;
-  position: relative;
-  transform: translate(-50%);
-}
 </style>

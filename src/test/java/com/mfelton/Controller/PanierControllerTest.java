@@ -87,30 +87,8 @@ public class PanierControllerTest {
         assertThat(actualPaniers.size()).isEqualTo(expected.size());
     }
 
-    @Test
-    void testFindPanierByClientId() throws Exception {
-        // Arrange
-        Panier expected = getPanier();
-        when(panierService.findClienById(any(Integer.class))).thenReturn(Optional.of(expected));
-        String url = "/panier/" + expected.getId();
 
-        // Act
-        MvcResult result =
-                mockMvc
-                        .perform(
-                                get(url)
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(mapper.writeValueAsString(expected)))
-                        .andReturn();
 
-        // Assert
-        var actualPanier =
-                mapper.readValue(result.getResponse().getContentAsString(), Panier.class);
-        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualPanier).isEqualTo(expected);
-    }
-
-    Client client = new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal");
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
@@ -119,7 +97,7 @@ public class PanierControllerTest {
     }
 
     private Panier getPanier() {
-        return new Panier(0,0,0,client,getFromages());
+        return new Panier(0,0,0,getFromages());
     }
 
     private List<Panier> getPaniers() {
