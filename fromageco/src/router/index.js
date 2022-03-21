@@ -5,7 +5,8 @@ import AccountDetails from '../components/AccountDetails.vue'
 import Items from '../components/Items.vue'
 import Panier from '../components/Panier.vue'
 import PleaseLogin from '../components/PleaseLogin.vue'
-import Paiement from '../components/Paiement.vue'
+// import Paiement from '../components/Paiement.vue'
+import NewPaiement from '../components/NewPaiement.vue'
 
 const routes = [
   {
@@ -38,11 +39,8 @@ const routes = [
   },
   {
     path:"/paiement",
-    component: Paiement
-  }
-
-
-  
+    component: NewPaiement
+  },
 ];
 
 const router = createRouter({

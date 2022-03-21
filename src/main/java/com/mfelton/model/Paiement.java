@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity
@@ -15,7 +16,7 @@ public class Paiement implements Serializable {
     private int id;
 
     private String marque;
-    private String numCarte;
+    private long numCarte;
     private String dateExpiration;
     private String detenteurCarte;
     private int cvv;
@@ -26,7 +27,7 @@ public class Paiement implements Serializable {
 
     public Paiement(){}
 
-    public Paiement(String marque, String numCarte, String dateExpiration, String detenteurCarte, int cvv, String codePostale,Client client) {
+    public Paiement(String marque, long numCarte, String dateExpiration, String detenteurCarte, int cvv, String codePostale,Client client) {
         this.marque = marque;
         this.numCarte = numCarte;
         this.dateExpiration = dateExpiration;

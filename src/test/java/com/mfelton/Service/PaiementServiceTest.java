@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -58,15 +59,15 @@ public class PaiementServiceTest {
     @Test
     public void testFindPaiementByClientEmail() {
         // Arrange
-        Paiement expected = getPaiement();
-        when(paiementRepository.findPaiementByClientCourriel(expected.getClient().getCourriel()))
-                .thenReturn(expected);
+        List<Paiement> listPaiements = getPaiements();
+        when(paiementRepository.findPaiementByClientCourriel(any(String.class)))
+                .thenReturn(listPaiements);
 
         // Act
-        Optional<Paiement> returned = paiementService.findPaiementByCourriel(expected.getClient().getCourriel());
+        List<Paiement> returned = paiementService.findPaiementByCourriel(getClient().getCourriel());
 
         // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
+        assertThat(returned).isEqualTo(listPaiements);
     }
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
@@ -84,7 +85,7 @@ public class PaiementServiceTest {
     }
 
     private Paiement getPaiement() {
-        return new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",getClient());
+        return new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",getClient());
     }
 
     private List<Paiement> getPaiements() {

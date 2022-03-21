@@ -88,12 +88,13 @@ public class PaiementControllerTest {
         assertThat(actualPaiements.size()).isEqualTo(expected.size());
     }
 
+
     @Test
     void testFindPaiementByClientCourriel() throws Exception {
         // Arrange
-        Paiement expected = getPaiement();
-        when(paiementService.findPaiementByCourriel(any(String.class))).thenReturn(Optional.of(expected));
-        String url = "/paiement/" + expected.getClient().getCourriel();
+        List<Paiement> expected = getPaiements();
+        when(paiementService.findPaiementByCourriel(any(String.class))).thenReturn(expected);
+        String url = "/paiement/" + getClient().getCourriel();
 
         // Act
         MvcResult result =
@@ -105,10 +106,9 @@ public class PaiementControllerTest {
                         .andReturn();
 
         // Assert
-        var actualPaiement =
-                mapper.readValue(result.getResponse().getContentAsString(), Paiement.class);
+        var actualPaiements = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualPaiement).isEqualTo(expected);
+        assertThat(actualPaiements).hasSize(expected.size());
     }
 
 
@@ -128,7 +128,7 @@ public class PaiementControllerTest {
     }
 
     private Paiement getPaiement() {
-        return new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",getClient());
+        return new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",getClient());
     }
 
     private List<Paiement> getPaiements() {

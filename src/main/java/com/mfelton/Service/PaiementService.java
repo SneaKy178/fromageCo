@@ -25,7 +25,7 @@ public class PaiementService {
         return paiementRepository.findAll();
     }
 
-    public Optional<Paiement> findPaiementByCourriel(String email) {
-        return Optional.of(paiementRepository.findPaiementByClientCourriel(email));
+    public List<Paiement> findPaiementByCourriel(String email) {
+        return paiementRepository.findPaiementByClientCourriel(email);
     }
 }

@@ -12,16 +12,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>{{fullUser.marque}}</td>
-      <td>**** **** **** ****</td>
-      <td>{{fullUser.dateExpiration}}</td>
-      <td>{{fullUser.detenteurCarte}}</td>
-      <td>***</td>
-      <td>{{fullUser.codePostale}}</td>
+    <tr v-for="carte in fullUser" v-bind:key="carte">
+      <td>{{carte.marque}}</td>
+      <td>{{carte.numCarte}}</td>
+      <td>{{carte.dateExpiration}}</td>
+      <td>{{carte.detenteurCarte}}</td>
+      <td>{{carte.cvv}}</td>
+      <td>{{carte.codePostale}}</td>
     </tr>
   </tbody>
   </table>
+  <AddPaiement/>
 </div>
   <div v-else>
     <PleaseLogin/>
@@ -30,11 +31,13 @@
 
 <script>
 import PleaseLogin from "./PleaseLogin.vue"
+import AddPaiement from "./AddPaiement.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
     components: {
-    PleaseLogin
+    PleaseLogin,
+    AddPaiement
   },
   setup() {
     const { state } = global;
@@ -52,9 +55,8 @@ export default {
         })
         .then(async(data) => {
           this.fullUser = data;
-          console.log(data,"data")
       });
-    }
+    },
   }
 };
 </script>

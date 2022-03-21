@@ -60,7 +60,8 @@ public class FromageCoApplication implements CommandLineRunner {
         Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier);
         clientRepository.save(client);
 
-        Paiement paiement = new Paiement("VISA","2320323232","02/25","Mathieu Felton",123,"J6J5S2",client);
+        Paiement paiement = new Paiement("VISA",1234123412341234L,"02/25","Mathieu Felton",123,"J6J5S2",client);
         paiementRepository.save(paiement);
+
     }
 }

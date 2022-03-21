@@ -20,7 +20,7 @@ public class PanierController {
     }
 
     @PostMapping(path = "/panier")
-    public ResponseEntity<Panier> createClient(@RequestBody Panier panier){
+    public ResponseEntity<Panier> createPanier(@RequestBody Panier panier){
         return panierService
                 .addPanier(panier)
                 .map(panier1 -> ResponseEntity.status(HttpStatus.CREATED).body(panier1))

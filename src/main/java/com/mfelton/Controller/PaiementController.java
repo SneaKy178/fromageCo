@@ -20,10 +20,10 @@ public class PaiementController {
     }
 
     @PostMapping(path = "/paiement")
-    public ResponseEntity<Paiement> createClient(@RequestBody Paiement paiement){
+    public ResponseEntity<Paiement> createPaiement(@RequestBody Paiement paiement){
         return paiementService
                 .addPaiement(paiement)
-                .map(client1 -> ResponseEntity.status(HttpStatus.CREATED).body(client1))
+                .map(paiement1 -> ResponseEntity.status(HttpStatus.CREATED).body(paiement1))
                 .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
@@ -33,10 +33,7 @@ public class PaiementController {
     }
 
     @GetMapping("/paiement/{email}")
-    public ResponseEntity<Paiement> findPaimentByCourriel(@PathVariable("email") String email) {
-        return paiementService
-                .findPaiementByCourriel(email)
-                .map(user1 -> ResponseEntity.status(HttpStatus.OK).body(user1))
-                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
+    public ResponseEntity<List<Paiement>> findPaimentByCourriel(@PathVariable("email") String email) {
+        return new ResponseEntity<>(paiementService.findPaiementByCourriel(email),HttpStatus.OK);
     }
 }
