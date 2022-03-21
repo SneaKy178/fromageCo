@@ -30,7 +30,7 @@ public class Client extends User implements Serializable {
 
     public Client(){
         role = UserRole.CLIENT;
-        panier = new Panier(0,0,0,Collections.emptyList());
+        panier = new Panier(0,0,Collections.emptyList());
     }
 
     public Client(String prenom, String nom, String courriel, String password, String adresse, String numTelephone, String province, String ville,Panier panier) {

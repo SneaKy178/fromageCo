@@ -95,7 +95,7 @@ public class ClientServiceTest {
     }
 
     private Panier getPanier() {
-        return new Panier(0,0,0,getFromages());
+        return new Panier(0,0,getFromages());
     }
 
     private Client getClient() {

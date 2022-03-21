@@ -16,13 +16,11 @@
     </tr>
     <tr>
       <th>Nombre total</th>
-      <th>Prix avant taxes</th>
-      <th>Prix après taxes</th>
+      <th colspan="2">Prix total</th>
     </tr>
     <tr>
       <th>{{panier.nbrFromage}}</th>
-      <th>{{panier.prixTotalAvantTaxes}}$</th>
-      <th>{{panier.prixTotalApresTaxes}}$</th>
+      <th colspan="2">{{panier.prixTotal}}$</th>
     </tr>
   </tbody>
 </table>

@@ -16,17 +16,15 @@ public class Panier implements Serializable {
     private int id;
 
     private int nbrFromage;
-    private double prixTotalAvantTaxes;
-    private double prixTotalApresTaxes;
+    private double prixTotal;
 
     @OneToMany
     private List<Fromage> listeFromages;
 
     public Panier(){}
-    public Panier(int nbrFromage, double prixTotalAvantTaxes, double prixTotalApresTaxes, List<Fromage> listeFromages) {
+    public Panier(int nbrFromage, double prixTotal, List<Fromage> listeFromages) {
         this.nbrFromage = nbrFromage;
-        this.prixTotalAvantTaxes = prixTotalAvantTaxes;
-        this.prixTotalApresTaxes = prixTotalApresTaxes;
+        this.prixTotal = prixTotal;
         this.listeFromages = listeFromages;}
 
 }

@@ -62,7 +62,7 @@ public class PanierServiceTest {
     }
 
     private Panier getPanier() {
-        return new Panier(0,0,0,getFromages());
+        return new Panier(0,0,getFromages());
     }
 
     Client client = new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
