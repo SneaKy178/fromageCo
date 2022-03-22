@@ -14,15 +14,9 @@
       </div>
       <div class="card-footer">
         <small class="text-muted"
-          >{{ fromage.prix }}
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            max="5"
-            value="1"
-        /></small>
+          >{{ fromage.prix }}$
+          </small>
+          <button @click="addPanier(fromage)">add</button>
       </div>
     </div>
   </div>
@@ -32,17 +26,31 @@
 
 <script>
 import { ref } from "vue";
-
-
+import global from "./global";
 export default {
   created(){
     this.fetchFromages();
+    this.fetchData();
   },
   setup() {
     const fromages = ref({});
-    return { fromages};
+    const { state } = global;
+    const fullUser = ref({});
+    return { fromages, state, fullUser};
   },
     methods: {
+          fetchData() {
+      console.log(this.state.isLoggedIn);
+      console.log(this.fullUser, "fullUser");
+      fetch(`http://localhost:9191/client/${this.state.courriel}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data, "data");
+          this.fullUser = data;
+        });
+    },
     fetchFromages() {
       fetch(`http://localhost:9191/fromages`)
         .then((res) => {
@@ -52,13 +60,39 @@ export default {
           console.log(data,"fromage")
           this.fromages = data;
         });
+    },
+    addPanier(item) {
+        const listItem = []
+        listItem.push(item)
+
+        const newPanier = {
+          id : this.fullUser.id,
+          nbrFromage: 1,
+          prixTotal: item.prix,
+          listeFromages: listItem,
+        };
+
+        newPanier.nbrFromage += this.fullUser.panier.nbrFromage
+        newPanier.prixTotal += this.fullUser.panier.prixTotal
+        newPanier.listeFromages.push(...this.fullUser.panier.listeFromages)
+
+          fetch("http://localhost:9191/panier", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newPanier),
+          }).then(async (res) => {
+              res.json()
+              await this.fetchData()
+          });
+
     }
 }
 }
 </script>
 
 <style scoped>
-input[type="number"] {
+
+button {
   float: right;
 }
 

@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootApplication
@@ -55,7 +56,7 @@ public class FromageCoApplication implements CommandLineRunner {
 
 
 
-        Panier panier = new Panier(2,9,List.of(fromage1,fromage2));
+        Panier panier = new Panier(0,0, Collections.emptyList());
 
         Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier);
         clientRepository.save(client);

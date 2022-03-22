@@ -58,6 +58,7 @@ export default {
           this.fullUser = data;
           this.panier = data.panier
           this.listFromage = data.panier.listeFromages
+          console.log(data.panier,"panier")
       });
     },
   },
