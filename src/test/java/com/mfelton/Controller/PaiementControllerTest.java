@@ -24,9 +24,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @ContextConfiguration(classes = PaiementController.class)
 @WebMvcTest(PaiementController.class)
@@ -109,6 +110,20 @@ public class PaiementControllerTest {
         var actualPaiements = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(actualPaiements).hasSize(expected.size());
+    }
+
+    @Test
+    void testDeletePaiement() throws Exception {
+        // Arrange
+        Paiement expected = new Paiement();
+        expected.setId(1);
+        doNothing().when(paiementService).deletePaiement(anyInt());
+
+        // Act
+        MvcResult result = mockMvc.perform(delete("/paiement/delete/" + expected.getId())).andReturn();
+
+        // Assert
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
 

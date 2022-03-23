@@ -1,5 +1,7 @@
 <template>
 <div v-if="state.isLoggedIn && state.role == 'CLIENT'">
+  <div v-if="listPaiements.length == 0"> <h2 id="pasPaiement">Vous n'avez pas de méthode de paiement enregistrer</h2></div>
+  <div v-else>
   <table class="table table-dark mt-4 justify-content-center">
   <thead>
     <tr>
@@ -9,6 +11,7 @@
       <th>Détenteur de carte</th>
       <th>CVV</th>
       <th>Code Postale</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -19,9 +22,11 @@
       <td>{{carte.detenteurCarte}}</td>
       <td>{{carte.cvv}}</td>
       <td>{{carte.codePostale}}</td>
+       <td> <button @click="addPanier(carte)">delete</button></td>
     </tr>
   </tbody>
   </table>
+ </div>
   
     <h1>Ajouter un paiement</h1>
     <form @submit.prevent="handleSubmit">
@@ -33,25 +38,24 @@
       </select>
 
       <label>Numéro de carte : </label>
-      <input type="text" required v-model="numCarte" />
+      <input type="text" required v-model="numCarte"  placeholder="1111111111111111" maxlength="16"/>
 
       <label>Date expiration : </label>
-      <input type="text" required v-model="dateExpiration" />
+      <input type="text" required v-model="dateExpiration" placeholder="01/11"  maxlength="5"/>
 
       <label>Nom du détenteur de carte : </label>
-      <input type="text" required v-model="detenteur" />
+      <input type="text" required v-model="detenteur" placeholder="John Doe"/>
 
       <label>cvv : </label>
-      <input type="text" required v-model="cvv" />
+      <input type="text" required v-model="cvv" placeholder="111" maxlength="3" />
 
       <label>Code postal : </label>
-      <input type="text" required v-model="codePostale" />
+      <input type="text" required v-model="codePostale" placeholder="J1J5S1"  maxlength="6" />
 
       <div class="submit">
-        <button>Ajouter un mode de paiement</button>
+        <button id="formButton">Ajouter un mode de paiement</button>
       </div>
     </form>
-
 
 </div>
   <div v-else>
@@ -95,6 +99,7 @@ export default {
         })
         .then(async(data) => {
           this.listPaiements = data;
+          console.log(data,"paiement")
       });
     },
     fetchData() {
@@ -118,8 +123,6 @@ export default {
           client: this.fullUser
         });
 
-        console.log(paiement)
-
          fetch("http://localhost:9191/paiement", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -127,7 +130,19 @@ export default {
           }).then(async (res) => {
               res.json()
                 await this.fetchPaiements();
+                this.marque = ""
+                this.numCarte = ""
+                this.dateExpiration = ""
+                this.detenteur = ""
+                this.cvv = ""
+                this.codePostale = ""
           });
+      },
+      addPanier(paiement) {
+        fetch(`http://localhost:9191/paiement/delete/${paiement.id}`, {method: 'DELETE'})
+        .then(async () => {
+          await this.fetchPaiements();
+        })
       },
   },
 };
@@ -189,7 +204,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-button {
+#formButton {
   background: #0b6dff;
   border: 0;
   padding: 10px 20px;
@@ -202,11 +217,11 @@ button {
   text-align: center;
 }
 
-.error {
-  color: #ff0062;
-  margin-top: 10px;
-  font-size: 0.8em;
-  font-weight: bold;
+
+#pasPaiement{
+  margin-top: 20px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 </style>
 

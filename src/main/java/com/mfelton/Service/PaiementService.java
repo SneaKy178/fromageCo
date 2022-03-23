@@ -28,4 +28,8 @@ public class PaiementService {
     public List<Paiement> findPaiementByCourriel(String email) {
         return paiementRepository.findPaiementByClientCourriel(email);
     }
+
+    public void deletePaiement(int id) {
+        paiementRepository.deleteById(id);
+    }
 }

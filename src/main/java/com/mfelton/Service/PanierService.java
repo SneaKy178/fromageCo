@@ -24,4 +24,6 @@ public class PanierService {
         return panierRepository.findAll();
     }
 
+
+
 }

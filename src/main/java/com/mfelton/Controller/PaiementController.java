@@ -32,8 +32,14 @@ public class PaiementController {
         return new ResponseEntity<>(paiementService.getAllPaiements(), HttpStatus.OK);
     }
 
-    @GetMapping("/paiement/{email}")
+    @GetMapping(path = "/paiement/{email}")
     public ResponseEntity<List<Paiement>> findPaimentByCourriel(@PathVariable("email") String email) {
         return new ResponseEntity<>(paiementService.findPaiementByCourriel(email),HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/paiement/delete/{id}")
+    public ResponseEntity deletePaiement(@PathVariable int id) {
+        paiementService.deletePaiement(id);
+        return ResponseEntity.ok().build();
     }
 }

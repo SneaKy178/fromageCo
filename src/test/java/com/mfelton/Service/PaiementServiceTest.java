@@ -17,7 +17,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PaiementServiceTest {
@@ -68,6 +69,20 @@ public class PaiementServiceTest {
 
         // Assert
         assertThat(returned).isEqualTo(listPaiements);
+    }
+
+    @Test
+    void testDeletePaiement() {
+        // Arrange
+        Paiement expected = getPaiement();
+        expected.setId(1);
+        doNothing().when(paiementRepository).deleteById(anyInt());
+
+        // Act
+        paiementService.deletePaiement(expected.getId());
+
+        // Assert
+        verify(paiementRepository).deleteById(anyInt());
     }
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));

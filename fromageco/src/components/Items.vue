@@ -14,7 +14,7 @@
       </div>
       <div class="card-footer">
         <small class="text-muted"
-          >{{ fromage.prix }}$
+          >{{fromage.prix.toFixed(2)}}$
           </small>
           <button @click="addPanier(fromage)">add</button>
       </div>

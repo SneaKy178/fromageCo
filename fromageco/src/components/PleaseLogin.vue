@@ -1,19 +1,10 @@
 <template>
       <div class="center">
     <h1>Veuillez vous conneter</h1>
-    <button @click="login">Login</button><br />
+    <button><router-link to="/login" class="link">Login</router-link></button><br /> 
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    login() {
-      this.$router.push("/login");
-    }
-    },
-};
-</script>
 
 <style scoped>
 .center {
@@ -33,5 +24,10 @@ button {
   color: white;
   border-radius: 20px;
   font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color:white;
 }
 </style>

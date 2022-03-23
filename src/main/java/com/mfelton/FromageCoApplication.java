@@ -54,15 +54,16 @@ public class FromageCoApplication implements CommandLineRunner {
         Fromage fromage6 = new Fromage("Salat tradition - 1kg",59.90," Inspiré par le Salers tradition, avec un lait 100% d'origine Salers",13,salat);
         fromageRepository.saveAll(List.of(fromage1,fromage2,fromage3,fromage4,fromage5,fromage6));
 
+        Panier panier = new Panier(0,0,Collections.emptyList());
 
-
-        Panier panier = new Panier(0,0, Collections.emptyList());
-
-        Client client = new Client("Mathieu","Felton","mat@gmail.com","Test1234","123 sreet","51423332","Quebec","Montreal",panier);
+        Client client = new Client("Mathieu","Felton","mat@gmail.com","Password1","111 street","514-232-2323","Québec","Montreal",panier);
         clientRepository.save(client);
 
-        Paiement paiement = new Paiement("VISA",1234123412341234L,"02/25","Mathieu Felton",123,"J6J5S2",client);
+        Paiement paiement = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
         paiementRepository.save(paiement);
-
+        Paiement paiement1 = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
+        paiementRepository.save(paiement1);
+        Paiement paiement2 = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
+        paiementRepository.save(paiement2);
     }
 }
