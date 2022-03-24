@@ -1,6 +1,6 @@
 <template>
 <div v-if="state.isLoggedIn && state.role == 'CLIENT'">
-  <div v-if="listPaiements.length == 0"> <h2 id="pasPaiement">Vous n'avez pas de méthode de paiement enregistrer</h2></div>
+  <div v-if="listPaiements.length == 0"> <h2 id="pasPaiement">Vous n'avez pas de méthode de paiement enregistré</h2></div>
   <div v-else>
   <table class="table table-dark mt-4 justify-content-center">
   <thead>

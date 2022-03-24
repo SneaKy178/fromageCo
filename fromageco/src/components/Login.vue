@@ -1,4 +1,5 @@
 <template>
+    <h3>Pas de compte? : <router-link to="/form"> Inscrivez-vous dès maintenant</router-link></h3>
   <form @submit.prevent="handleSubmit" class="center">
     <label>Courriel : </label>
     <input type="email" required v-model="courriel" />
@@ -10,6 +11,8 @@
       <button>Login</button>
     </div>
   </form>
+
+
 </template>
 
 <script>
@@ -124,5 +127,9 @@ button {
   left: 50%;
   position: absolute;
   transform: translate(-50%);
+}
+h3{
+  margin-top: 20px;
+  text-align: center;
 }
 </style>
