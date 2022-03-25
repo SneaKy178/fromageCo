@@ -7,7 +7,7 @@
       <th>Nom</th>
       <th>Description</th>
       <th>Prix</th>
-      <th>Delete</th>
+      <th>Enlever du panier</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,7 @@
       <td>{{fromage.nom}}</td>
       <td>{{fromage.description}}</td>
       <td>{{fromage.prix.toFixed(2)}}$</td>
-      <td> <button @click="addPanier(fromage)">delete</button></td>
+      <td> <button @click="addPanier(fromage)">Enlever</button></td>
     </tr>
     <tr>
       <th>Nombre total</th>

@@ -11,7 +11,7 @@
       <th>Détenteur de carte</th>
       <th>CVV</th>
       <th>Code Postale</th>
-      <th>Delete</th>
+      <th>Enlever une carte</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
       <td>{{carte.detenteurCarte}}</td>
       <td>{{carte.cvv}}</td>
       <td>{{carte.codePostale}}</td>
-       <td> <button @click="addPanier(carte)">delete</button></td>
+       <td> <button @click="addPanier(carte)">Enlever</button></td>
     </tr>
   </tbody>
   </table>

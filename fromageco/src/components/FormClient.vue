@@ -30,7 +30,7 @@
       <input type="text" required v-model="numTelephone" />
 
       <label>Province : </label>
-      <input type="text" required v-model="province" />
+      <input type="text" required value="Québec" readonly/>
 
       <label>Ville : </label>
       <input type="text" required v-model="ville" />
@@ -40,7 +40,7 @@
 
       <div>
         <input type="checkbox" required v-model="terms" />
-        <label>Acceptez vous de suivre les règles?</label>
+        <label>J'accepte les termes et conditions</label>
       </div>
 
       <div class="submit">
@@ -60,7 +60,7 @@ export default {
       password: "",
       adresse: "",
       numTelephone: "",
-      province: "",
+      province: "Québec",
       ville: "",
       terms: false,
       passwordError: "",

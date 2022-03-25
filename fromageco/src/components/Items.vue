@@ -10,13 +10,13 @@
       />
       <div class="card-body">
         <h5 class="card-title"> {{fromage.nom}}</h5>
-        <p class="card-text">Fromage vieillit de {{fromage.vieillesse}} mois.</p>
+        <p class="card-text">{{fromage.description}} </p>
       </div>
       <div class="card-footer">
         <small class="text-muted"
           >{{fromage.prix.toFixed(2)}}$
           </small>
-          <button @click="addPanier(fromage)">add</button>
+          <button @click="addPanier(fromage)">Ajouter au panier</button>
       </div>
     </div>
   </div>
@@ -99,5 +99,8 @@ button {
 img {
   height: 500px;
   width: 500px;
+}
+.card {
+  height: 660px;
 }
 </style>

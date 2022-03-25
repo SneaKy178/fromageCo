@@ -36,7 +36,7 @@ public class FromageController {
     }
 
     @GetMapping(path = "fromages/images/{id}")
-    public void generatePDF(@PathVariable("id") int id, HttpServletResponse response) {
+    public void generateImage(@PathVariable("id") int id, HttpServletResponse response) {
         try {
             Fromage fromage = fromageRepository.getById(id);
             InputStream inputStream =

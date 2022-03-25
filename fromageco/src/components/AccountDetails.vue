@@ -10,9 +10,6 @@
       <label>Courriel : </label>
       <input type="email" readonly :value="fullUser.courriel" />
 
-      <label>Numéro de téléphone : </label>
-      <input type="text" readonly :value="fullUser.numTelephone" />
-
       <div v-if="fullUser.role === 'CLIENT'">
 
         <label>Adresse : </label>
@@ -57,16 +54,12 @@ export default {
   },
   methods: {
     fetchData() {
-      console.log(this.state.isLoggedIn);
-      console.log(this.fullUser, "fullUser");
       fetch(`http://localhost:9191/client/${this.state.courriel}`)
         .then((res) => {
           return res.json();
         })
         .then((data) => {
-          console.log(data, "data");
           this.fullUser = data;
-          console.log(this.fullUser, "fulluser");
         });
     },
   },
