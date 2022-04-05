@@ -13,23 +13,26 @@
       <div v-if="fullUser.role === 'CLIENT'">
 
         <label>Adresse : </label>
-        <input type="text" readonly :value="fullUser.adresse" />
+        <input type="text" v-model="fullUser.adresse"/>
 
         <label>Numéro de téléphone : </label>
-        <input type="text" readonly :value="fullUser.numTelephone" />
+        <input type="text" v-model="fullUser.numTelephone" />
 
         <label>Province : </label>
         <input type="text" readonly :value="fullUser.province" />
 
         <label>Ville : </label>
-        <input type="text" readonly :value="fullUser.ville" />
+        <input type="text" v-model="fullUser.ville" />
+        
 
       </div>
       <div v-if="fullUser.role === 'ADMINISTRATEUR'">
         <label>Votre titre : </label>
         <input type="text" readonly :value="fullUser.departement" />
       </div>
+      
     </form>
+    <button @click="changeInfo()">Changer info</button>
   </div>
   <div v-else>
     <PleaseLogin/>
@@ -62,14 +65,41 @@ export default {
           this.fullUser = data;
         });
     },
+    changeInfo() {
+
+      const client = {
+          id : this.fullUser.id,
+          prenom: this.fullUser.prenom,
+          nom: this.fullUser.nom,
+          courriel: this.fullUser.courriel,
+          password: this.fullUser.password,
+          adresse: this.fullUser.adresse,
+          numTelephone: this.fullUser.numTelephone,
+          province: this.fullUser.province,
+          ville: this.fullUser.ville,
+          panier : this.fullUser.panier
+    }
+
+        fetch("http://localhost:9191/client", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(client),
+          }).then(async (res) => {
+              res.json()
+              await this.fetchData()
+          });
+
+
+
   },
+  }
 };
 </script>
 
 <style scoped>
 form {
   max-width: 500px;
-  margin: 30px auto;
+  margin: 20px auto;
   background: white;
   text-align: left;
   padding: 40px;
@@ -100,17 +130,22 @@ input[type="checkbox"] {
   position: relative;
   top: 2px;
 }
-.pill {
-  display: inline-block;
-  margin: 20px 10px 0 0;
-  padding: 6px 12px;
-  background: #eee;
+
+button {
+  background: #0b6dff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-bottom: px;
+  color: white;
   border-radius: 20px;
-  font-size: 12px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  color: #777;
-  cursor: pointer;
+  font-size: 16px;
+
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%);
+
+  
 }
 
 
