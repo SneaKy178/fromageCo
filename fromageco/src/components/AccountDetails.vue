@@ -1,6 +1,6 @@
 <template>
   <div v-if="state.isLoggedIn" class="center">
-    <form>
+    <form @submit.prevent="handleSubmit">
       <label>Prénom : </label>
       <input type="text" readonly :value="fullUser.prenom" />
 
@@ -30,9 +30,9 @@
         <label>Votre titre : </label>
         <input type="text" readonly :value="fullUser.departement" />
       </div>
-      
+      <button >Changer info</button>
     </form>
-    <button @click="changeInfo()">Changer info</button>
+    
   </div>
   <div v-else>
     <PleaseLogin/>
@@ -65,7 +65,7 @@ export default {
           this.fullUser = data;
         });
     },
-    changeInfo() {
+    handleSubmit() {
 
       const client = {
           id : this.fullUser.id,
