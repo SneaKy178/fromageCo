@@ -1,5 +1,5 @@
 <template>
-    <h3>Pas de compte? : <router-link to="/form"> Inscrivez-vous dès maintenant</router-link></h3>
+   
   <form @submit.prevent="handleSubmit" class="center">
     <label>Courriel : </label>
     <input type="email" required v-model="courriel" />
@@ -9,6 +9,11 @@
 
     <div class="submit">
       <button>Login</button>
+    <div id="inscription">
+      <h5>Ou inscrivez-vous</h5>
+      <router-link to="/form"> s'inscrire</router-link>
+    </div>
+      
     </div>
   </form>
 
@@ -128,8 +133,18 @@ button {
   position: absolute;
   transform: translate(-50%);
 }
-h3{
+#inscription {
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%);
   margin-top: 20px;
-  text-align: center;
+}
+
+#inscription a{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 20px;
 }
 </style>
