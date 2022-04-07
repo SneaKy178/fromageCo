@@ -3,15 +3,13 @@ package com.mfelton.Controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mfelton.Repository.FromageRepository;
-import com.mfelton.Service.ClientService;
 import com.mfelton.Service.FromageService;
-import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,7 +20,10 @@ import java.util.Base64;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @ContextConfiguration(classes = FromageController.class)
@@ -65,6 +66,20 @@ public class FromageControllerTest {
         var actualFromage = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(actualFromage.size()).isEqualTo(expected.size());
+    }
+
+    @Test
+    void testDeleteFromage() throws Exception {
+        // Arrange
+        Fromage expected = new Fromage();
+        expected.setId(1);
+        doNothing().when(fromageService).deleteFromage(anyInt());
+
+        // Act
+        MvcResult result = mockMvc.perform(delete("/fromage/delete/" + expected.getId())).andReturn();
+
+        // Assert
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
 

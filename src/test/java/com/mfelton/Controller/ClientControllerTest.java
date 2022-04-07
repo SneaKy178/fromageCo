@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -86,52 +86,6 @@ public class ClientControllerTest {
         assertThat(actualClients.size()).isEqualTo(expected.size());
     }
 
-    @Test
-    void testLoginClient() throws Exception {
-        // Arrange
-        Client expected = getClient();
-        when(clientService.login(expected.getCourriel(), expected.getPassword()))
-                .thenReturn(Optional.of(expected));
-        String url = "/client/" + expected.getCourriel() + "/" + expected.getPassword();
-
-        // Act
-        MvcResult result =
-                mockMvc
-                        .perform(
-                                get(url)
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(mapper.writeValueAsString(expected)))
-                        .andReturn();
-
-        // Assert
-        var actualClient =
-                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
-        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualClient).isEqualTo(expected);
-    }
-
-    @Test
-    void testFindClientByEmail() throws Exception {
-        // Arrange
-        Client expected = getClient();
-        when(clientService.findClientByCourriel(any(String.class))).thenReturn(Optional.of(expected));
-        String url = "/client/" + expected.getCourriel();
-
-        // Act
-        MvcResult result =
-                mockMvc
-                        .perform(
-                                get(url)
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(mapper.writeValueAsString(expected)))
-                        .andReturn();
-
-        // Assert
-        var actualClient =
-                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
-        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualClient).isEqualTo(expected);
-    }
 
 
 

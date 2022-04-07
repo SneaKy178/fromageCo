@@ -6,10 +6,7 @@ import com.mfelton.model.Fromage;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -47,5 +44,12 @@ public class FromageController {
             e.printStackTrace();
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+
+    @DeleteMapping(path = "/fromage/delete/{id}")
+    public ResponseEntity deleteFromage(@PathVariable int id) {
+        fromageService.deleteFromage(id);
+        return ResponseEntity.ok().build();
     }
 }

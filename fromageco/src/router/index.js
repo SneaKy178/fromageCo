@@ -6,6 +6,8 @@ import Items from '../components/Items.vue'
 import Panier from '../components/Panier.vue'
 import PleaseLogin from '../components/PleaseLogin.vue'
 import NewPaiement from '../components/NewPaiement.vue'
+import Users from '../components/Users.vue'
+import Fromages from '../components/Fromages.vue'
 
 const routes = [
   {
@@ -40,6 +42,14 @@ const routes = [
     path:"/paiement",
     component: NewPaiement
   },
+  {
+    path:"/users",
+    component: Users
+  },
+  {
+    path:"/fromages",
+    component: Fromages
+  }
 ];
 
 const router = createRouter({

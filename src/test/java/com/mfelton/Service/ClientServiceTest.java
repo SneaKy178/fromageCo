@@ -54,38 +54,6 @@ public class ClientServiceTest {
                 .hasSize(3);
     }
 
-    @Test
-    public void testLoginClient() {
-        // Arrange
-        Client expected = getClient();
-        when(clientRepository.findClientByCourrielIgnoreCaseAndPassword(
-                expected.getCourriel(), expected.getPassword()))
-                .thenReturn(expected);
-
-        // Act
-        Optional<Client> returned = clientService.login(expected.getCourriel(), expected.getPassword());
-
-        // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
-    }
-
-    @Test
-    public void testFindClientByEmail() {
-        // Arrange
-        Client expected = getClient();
-        when(clientRepository.findClientByCourrielIgnoreCase(expected.getCourriel()))
-                .thenReturn(expected);
-
-        // Act
-        Optional<Client> returned = clientService.findClientByCourriel(expected.getCourriel());
-
-        // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
-    }
-
-
-
-
 
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));

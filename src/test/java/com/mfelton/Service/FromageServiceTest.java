@@ -3,6 +3,7 @@ package com.mfelton.Service;
 import com.mfelton.Repository.FromageRepository;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,8 @@ import java.util.Base64;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FromageServiceTest {
@@ -38,6 +40,20 @@ public class FromageServiceTest {
         // Assert
         assertThat(returned)
                 .hasSize(3);
+    }
+
+    @Test
+    void testDeleteFromage() {
+        // Arrange
+        Fromage expected = getFromage();
+        expected.setId(1);
+        doNothing().when(fromageRepository).deleteById(anyInt());
+
+        // Act
+        fromageService.deleteFromage(expected.getId());
+
+        // Assert
+        verify(fromageRepository).deleteById(anyInt());
     }
 
     private Fromage getFromage() {

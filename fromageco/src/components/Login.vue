@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      fetch(`http://localhost:9191/client/${this.courriel}/${this.password}`)
+      fetch(`http://localhost:9191/login/${this.courriel}/${this.password}`)
         .then((res) => {
           if (res.ok) {
             return res.json();

@@ -4,8 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.time.LocalDate;
 
 @Entity
 @Data

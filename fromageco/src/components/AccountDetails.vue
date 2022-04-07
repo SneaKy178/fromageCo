@@ -28,9 +28,12 @@
       </div>
       <div v-if="fullUser.role === 'ADMINISTRATEUR'">
         <label>Votre titre : </label>
-        <input type="text" readonly :value="fullUser.departement" />
+        <input type="text" readonly :value="fullUser.titre" />
       </div>
-      <button >Changer info</button>
+      <div v-if="fullUser.role === 'CLIENT'">
+        <button >Changer info</button>
+      </div>
+      
     </form>
     
   </div>
@@ -57,7 +60,7 @@ export default {
   },
   methods: {
     fetchData() {
-      fetch(`http://localhost:9191/client/${this.state.courriel}`)
+      fetch(`http://localhost:9191/${this.state.courriel}`)
         .then((res) => {
           return res.json();
         })

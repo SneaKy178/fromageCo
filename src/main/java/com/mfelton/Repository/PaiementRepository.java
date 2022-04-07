@@ -11,6 +11,7 @@ import java.util.List;
 public interface PaiementRepository extends JpaRepository<Paiement,Integer> {
 
     List<Paiement> findPaiementByClientCourriel(String courriel);
+    List<Paiement> findPaiementByClientId(int id);
 
 
 }

@@ -1,7 +1,7 @@
 package com.mfelton.Service;
 
 import com.mfelton.Repository.FromageRepository;
-import com.mfelton.model.Client;
+
 import com.mfelton.model.Fromage;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +19,9 @@ public class FromageService {
 
     public List<Fromage> getAllFromages() {
         return fromageRepository.findAll();
+    }
+
+    public void deleteFromage(int id) {
+        fromageRepository.deleteById(id);
     }
 }

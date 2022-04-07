@@ -24,13 +24,6 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Optional<Client> login(String email, String pwd) {
-            return Optional.of(clientRepository.findClientByCourrielIgnoreCaseAndPassword(email, pwd));
-    }
-
-    public Optional<Client> findClientByCourriel(String email) {
-            return Optional.of(clientRepository.findClientByCourrielIgnoreCase(email));
-    }
 
 
 }

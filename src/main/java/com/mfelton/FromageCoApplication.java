@@ -1,13 +1,7 @@
 package com.mfelton;
 
-import com.mfelton.Repository.ClientRepository;
-import com.mfelton.Repository.FromageRepository;
-import com.mfelton.Repository.PaiementRepository;
-import com.mfelton.Repository.PanierRepository;
-import com.mfelton.model.Client;
-import com.mfelton.model.Fromage;
-import com.mfelton.model.Paiement;
-import com.mfelton.model.Panier;
+import com.mfelton.Repository.*;
+import com.mfelton.model.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,12 +17,14 @@ public class FromageCoApplication implements CommandLineRunner {
     private final FromageRepository fromageRepository;
     private final PanierRepository panierRepository;
     private final PaiementRepository paiementRepository;
+    private final AdministrateurRepository administrateurRepository;
 
-    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository, PanierRepository panierRepository, PaiementRepository paiementRepository) {
+    public FromageCoApplication(ClientRepository clientRepository, FromageRepository fromageRepository, PanierRepository panierRepository, PaiementRepository paiementRepository, AdministrateurRepository administrateurRepository) {
         this.clientRepository = clientRepository;
         this.fromageRepository = fromageRepository;
         this.panierRepository = panierRepository;
         this.paiementRepository = paiementRepository;
+        this.administrateurRepository = administrateurRepository;
     }
 
     public static void main(String[] args) {
@@ -65,5 +61,9 @@ public class FromageCoApplication implements CommandLineRunner {
         paiementRepository.save(paiement1);
         Paiement paiement2 = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
         paiementRepository.save(paiement2);
+
+        Administrateur administrateur = new Administrateur("Eric","Felton","eric@gmail.com","Password1","Programmeur sénior");
+        administrateurRepository.save(administrateur);
+
     }
 }

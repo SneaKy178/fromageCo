@@ -5,6 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+<div v-if="state.isLoggedIn && state.role == 'CLIENT'">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -18,9 +19,49 @@
       </li>
     </ul>
   </div>
+  </div>
+  <div v-if="state.isLoggedIn && state.role == 'ADMINISTRATEUR'">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <router-link to="/users" class="link">Liste des utilisateurs</router-link>
+      </li>
+      <li class="nav-item active">
+        <router-link to="/fromages" class="link">Liste des fromages</router-link>
+      </li>
+    </ul>
+  </div>
+  </div>
 </nav>
 </template>
 
+
+
+<script>
+import { ref } from "vue";
+import global from "./global";
+export default {
+  setup() {
+    const { state } = global;
+    const fullUser = ref({});
+    return { state, fullUser };
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      fetch(`http://localhost:9191/${this.state.courriel}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          this.fullUser = data;
+        });
+    },
+  }
+};
+</script>
 
 <style scoped>
 

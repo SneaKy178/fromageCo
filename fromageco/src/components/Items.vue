@@ -42,7 +42,7 @@ export default {
           fetchData() {
       console.log(this.state.isLoggedIn);
       console.log(this.fullUser, "fullUser");
-      fetch(`http://localhost:9191/client/${this.state.courriel}`)
+      fetch(`http://localhost:9191/${this.state.courriel}`)
         .then((res) => {
           return res.json();
         })
