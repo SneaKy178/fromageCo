@@ -4,6 +4,7 @@
     <tr>
       <th>Prenom</th>
       <th>Nom</th>
+      <th>Courriel</th>
       <th>Enlever de la liste</th>
     </tr>
   </thead>
@@ -11,6 +12,7 @@
     <tr v-for="user in listUsers" v-bind:key="user">
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
+      <td>{{user.courriel}}</td>
       <td> <button>Enlever</button></td>
     </tr>
   </tbody>

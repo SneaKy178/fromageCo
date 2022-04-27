@@ -2,6 +2,7 @@ package com.mfelton.model;
 
 import com.mfelton.Enums.UserRole;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

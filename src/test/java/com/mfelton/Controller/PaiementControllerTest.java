@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class PaiementControllerTest {
     @Test
     public void testAddPaiement() throws Exception {
         // Arrange
-        Paiement expected = getPaiement();
+        Paiement expected = paiement;
         when(paiementService.addPaiement(expected)).thenReturn(Optional.of(expected));
 
         // Act
@@ -70,7 +71,7 @@ public class PaiementControllerTest {
     @Test
     void testGetAllPaiements() throws Exception {
         // Arrange
-        List<Paiement> expected = getPaiements();
+        List<Paiement> expected = paiements;
         when(paiementService.getAllPaiements()).thenReturn(expected);
 
         // Act
@@ -92,9 +93,9 @@ public class PaiementControllerTest {
     @Test
     void testFindPaiementByClientCourriel() throws Exception {
         // Arrange
-        List<Paiement> expected = getPaiements();
+        List<Paiement> expected = paiements;
         when(paiementService.findPaiementByCourriel(any(String.class))).thenReturn(expected);
-        String url = "/paiement/" + getClient().getCourriel();
+        String url = "/paiement/" + client.getCourriel();
 
         // Act
         MvcResult result =
@@ -125,27 +126,11 @@ public class PaiementControllerTest {
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
+    private Panier panier = new Panier(0,0, Collections.emptyList());
 
+    private Client client = new Client("Prenom","Nom","prenom@email.com","password","adresse","telephone","province","ville", panier);
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
+    private Paiement paiement =  new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",client);
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
-
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
-
-    private Client getClient() {
-        return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-    }
-
-    private Paiement getPaiement() {
-        return new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",getClient());
-    }
-
-    private List<Paiement> getPaiements() {
-        return List.of(getPaiement(),getPaiement(),getPaiement());
-    }
+    private List<Paiement> paiements =  List.of(paiement,paiement,paiement);
 }

@@ -14,11 +14,9 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
-    private final PaiementRepository paiementRepository;
 
-    public ClientController(ClientService clientService, PaiementRepository paiementRepository) {
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
-        this.paiementRepository = paiementRepository;
     }
 
     @PostMapping(path = "/client")
@@ -33,6 +31,7 @@ public class ClientController {
     public ResponseEntity<List<Client>> getAllClients() {
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }
+
 
 
 }

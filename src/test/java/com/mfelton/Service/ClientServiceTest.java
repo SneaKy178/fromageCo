@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class ClientServiceTest {
     @Test
     public void testAddClient() {
         // Arrange
-        Client expected = getClient();
+        Client expected = client;
         when(clientRepository.save(expected)).thenReturn(expected);
 
         // Act
@@ -43,7 +44,7 @@ public class ClientServiceTest {
     public void testGetAllClients() {
         // Arrange
         List<Client> expected =
-                getClients();
+                clients;
         when(clientRepository.findAll()).thenReturn(expected);
 
         // Act
@@ -56,21 +57,10 @@ public class ClientServiceTest {
 
 
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
+    private Panier panier = new Panier(0,0, Collections.emptyList());
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
+    private Client client = new Client("Prenom","Nom","prenom@email.com","password","adresse","telephone","province","ville", panier);
 
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
+    private List<Client> clients = List.of(client,client,client);
 
-    private Client getClient() {
-        return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-    }
-
-    private List<Client> getClients(){
-        return List.of(getClient(),getClient(),getClient());
-    }
 }

@@ -1,90 +1,60 @@
 package com.mfelton.Controller;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mfelton.Service.ClientService;
 import com.mfelton.Service.UserService;
-import com.mfelton.model.*;
+import com.mfelton.model.Administrateur;
+import com.mfelton.model.Client;
+import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Base64;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@ContextConfiguration(classes = ClientController.class)
-@WebMvcTest(ClientController.class)
+@ContextConfiguration(
+        classes = UserController.class,
+        initializers = ConfigFileApplicationContextInitializer.class)
+@WebMvcTest(UserController.class)
 public class UserControllerTest {
+
+    private final ObjectMapper mapper;
 
     @Autowired
     private MockMvc mockMvc;
 
-
     @MockBean
     private UserService userService;
 
-    @MockBean
-    private ClientService clientService;
 
-    @MockBean
-    private ClientController clientController;
-
-
-
-
-    private final ObjectMapper mapper;
 
     public UserControllerTest() {
         this.mapper = new ObjectMapper().findAndRegisterModules();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-//    @Test
-//    void testLoginClient() throws Exception {
-//        // Arrange
-//        User expected = getClient();
-//        when(userService.login(expected.getCourriel(), expected.getPassword()))
-//                .thenReturn(Optional.of(expected));
-//        String url = "/login/" + expected.getCourriel() + "/" + expected.getPassword();
-//
-//        // Act
-//        MvcResult result =
-//                mockMvc
-//                        .perform(
-//                                get(url)
-//                                        .contentType(MediaType.APPLICATION_JSON)
-//                                        .content(mapper.writeValueAsString(expected)))
-//                        .andReturn();
-//
-//        // Assert
-//        var actualClient =
-//                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
-//        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-//        assertThat(actualClient).isEqualTo(expected);
-//    }
-
     @Test
-    void testLoginAdministrateur() throws Exception {
+    void testLoginClient() throws Exception {
         // Arrange
-        Administrateur expected = getAdministrateur();
+        Client expected = client;
         when(userService.login(expected.getCourriel(), expected.getPassword()))
                 .thenReturn(Optional.of(expected));
-        String url = "/user/" + expected.getCourriel() + "/" + expected.getPassword();
+        String url = "/login/" + expected.getCourriel() + "/" + expected.getPassword();
 
         // Act
         MvcResult result =
@@ -96,27 +66,89 @@ public class UserControllerTest {
                         .andReturn();
 
         // Assert
-        var actualEtudiant =
+        var actualClient =
+                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(actualClient).isEqualTo(expected);
+    }
+
+    @Test
+    void testFindClientByEmail() throws Exception {
+        // Arrange
+        Client expected = client;
+        when(userService.findUserByCourriel(any(String.class))).thenReturn(Optional.of(expected));
+        String url = "/" + expected.getCourriel();
+
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                get(url)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualClient =
+                mapper.readValue(result.getResponse().getContentAsString(), Client.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(actualClient).isEqualTo(expected);
+    }
+
+    @Test
+    void testLoginAdministrateur() throws Exception {
+        // Arrange
+        Administrateur expected = administrateur;
+        when(userService.login(expected.getCourriel(), expected.getPassword()))
+                .thenReturn(Optional.of(expected));
+        String url = "/login/" + expected.getCourriel() + "/" + expected.getPassword();
+
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                get(url)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualAdministrateur =
                 mapper.readValue(result.getResponse().getContentAsString(), Administrateur.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(actualEtudiant).isEqualTo(expected);
+        assertThat(actualAdministrateur).isEqualTo(expected);
     }
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
+    @Test
+    void testFindAdministrateurByEmail() throws Exception {
+        // Arrange
+        Administrateur expected = administrateur;
+        when(userService.findUserByCourriel(any(String.class))).thenReturn(Optional.of(expected));
+        String url = "/" + expected.getCourriel();
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                get(url)
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualAdministrateur =
+                mapper.readValue(result.getResponse().getContentAsString(), Administrateur.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(actualAdministrateur).isEqualTo(expected);
     }
 
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
+    Administrateur administrateur = new Administrateur("Prenom","Nom","prenom@email.com","password","titre");
 
-    private Client getClient() {
-        return new Client("John","Doe","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-    }
+    Panier panier = new Panier(0,0,Collections.emptyList());
 
-    private Administrateur getAdministrateur() {
-        return new Administrateur("John","Doe","test@gmail.com","Test1234","Test");
-    }
+    Client client = new Client("Prenom","Nom","prenom@email.com","password","adresse","telephone","province","ville", panier);
+
+
+
+
 }

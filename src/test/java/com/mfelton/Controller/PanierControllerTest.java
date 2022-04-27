@@ -45,7 +45,7 @@ public class PanierControllerTest {
     @Test
     public void testAddPanier() throws Exception {
         // Arrange
-        Panier expected = getPanier();
+        Panier expected = panier;
         when(panierService.addPanier(expected)).thenReturn(Optional.of(expected));
 
         // Act
@@ -67,7 +67,7 @@ public class PanierControllerTest {
     @Test
     void testGetAllPanier() throws Exception {
         // Arrange
-        List<Panier> expected = getPaniers();
+        List<Panier> expected = paniers;
         when(panierService.getAllPaniers()).thenReturn(expected);
 
         // Act
@@ -86,19 +86,12 @@ public class PanierControllerTest {
     }
 
 
-
-
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
+    private List<Fromage> fromages = List.of(fromage,fromage,fromage);
 
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
+    private Panier panier = new Panier(0,0,fromages);
 
-    private List<Panier> getPaniers() {
-        return List.of(getPanier(),getPanier(),getPanier());
-    }
+    private List<Panier> paniers = List.of(panier,panier,panier);
+
 }

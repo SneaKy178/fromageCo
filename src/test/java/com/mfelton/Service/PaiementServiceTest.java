@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class PaiementServiceTest {
     @Test
     public void testAddPaiement() {
         // Arrange
-        Paiement expected = getPaiement();
+        Paiement expected = paiement;
         when(paiementRepository.save(expected)).thenReturn(expected);
 
         // Act
@@ -46,7 +47,7 @@ public class PaiementServiceTest {
     public void testGetAllPaiements() {
         // Arrange
         List<Paiement> expected =
-                getPaiements();
+                paiements;
         when(paiementRepository.findAll()).thenReturn(expected);
 
         // Act
@@ -60,12 +61,12 @@ public class PaiementServiceTest {
     @Test
     public void testFindPaiementByClientEmail() {
         // Arrange
-        List<Paiement> listPaiements = getPaiements();
+        List<Paiement> listPaiements = paiements;
         when(paiementRepository.findPaiementByClientCourriel(any(String.class)))
                 .thenReturn(listPaiements);
 
         // Act
-        List<Paiement> returned = paiementService.findPaiementByCourriel(getClient().getCourriel());
+        List<Paiement> returned = paiementService.findPaiementByCourriel(client.getCourriel());
 
         // Assert
         assertThat(returned).isEqualTo(listPaiements);
@@ -74,7 +75,7 @@ public class PaiementServiceTest {
     @Test
     void testDeletePaiement() {
         // Arrange
-        Paiement expected = getPaiement();
+        Paiement expected = paiement;
         expected.setId(1);
         doNothing().when(paiementRepository).deleteById(anyInt());
 
@@ -85,28 +86,12 @@ public class PaiementServiceTest {
         verify(paiementRepository).deleteById(anyInt());
     }
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
+    private Panier panier = new Panier(0,0, Collections.emptyList());
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
+    private Client client = new Client("Prenom","Nom","prenom@email.com","password","adresse","telephone","province","ville", panier);
 
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
+    private Paiement paiement =  new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",client);
 
-    private Client getClient() {
-        return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-    }
-
-    private Paiement getPaiement() {
-        return new Paiement("VISA",2320323232L,"02/25","Mathieu Felton",123,"J6J5S2",getClient());
-    }
-
-    private List<Paiement> getPaiements() {
-        return List.of(getPaiement(),getPaiement(),getPaiement());
-    }
-
-
+    private List<Paiement> paiements =  List.of(paiement,paiement,paiement);
 
 }

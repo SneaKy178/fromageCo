@@ -1,4 +1,6 @@
 <template>
+  <div v-if="state.isLoggedIn && state.role == 'ADMINISTRATEUR'">
+    <div v-if="listFromages.length > 0">
   <table class="table table-dark">
   <thead>
     <tr>
@@ -9,19 +11,31 @@
   </thead>
   <tbody>
     <tr v-for="fromage in listFromages" v-bind:key="fromage">
-      <td>{{fromage.prenom}}</td>
       <td>{{fromage.nom}}</td>
-      <td> <button>Enlever</button></td>
+      <td>{{fromage.description}}</td>
+      <td> <button @click="removeFromage(fromage)">Enlever</button></td>
     </tr>
   </tbody>
 </table>
+    </div>
+    <div v-else class=" d-flex justify-content-center mt-4">
+      <h2 >La liste est vide</h2>
+    </div>
+    </div>
+  <div v-else>
+    <PleaseLogin/>
+  </div>
   
 </template>
 
 <script>
+import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
+    components: {
+    PleaseLogin
+  },
   setup() {
     const { state } = global;
     const listFromages = ref({});
@@ -40,6 +54,12 @@ export default {
           this.listFromages = data;
       });
     },
+    removeFromage(fromage) {
+      fetch(`http://localhost:9191/fromage/delete/${fromage.id}`, {method: 'DELETE'})
+        .then(async () => {
+          await this.fetchData();
+        })
+      },
   },
 };
 </script>
@@ -61,17 +81,4 @@ table {
   font-size: 16px;
 }
 
-a {
-  text-decoration: none;
-  color:white;
-}
-
-.center {
-  margin-top: 15%;
-  text-align: center;
-  width: 500px;
-  left: 50%;
-  position: relative;
-  transform: translate(-50%);
-}
 </style>

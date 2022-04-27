@@ -31,7 +31,7 @@ public class FromageServiceTest {
     public void testGetAllFromages() {
         // Arrange
         List<Fromage> expected =
-                getFromages();
+                fromages;
         when(fromageRepository.findAll()).thenReturn(expected);
 
         // Act
@@ -45,7 +45,7 @@ public class FromageServiceTest {
     @Test
     void testDeleteFromage() {
         // Arrange
-        Fromage expected = getFromage();
+        Fromage expected = fromage;
         expected.setId(1);
         doNothing().when(fromageRepository).deleteById(anyInt());
 
@@ -56,11 +56,7 @@ public class FromageServiceTest {
         verify(fromageRepository).deleteById(anyInt());
     }
 
-    private Fromage getFromage() {
-        return new Fromage("Chevre",12.95,"test",100,Base64.getDecoder().decode("test"));
-    }
+    private Fromage fromage =  new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
-    private List<Fromage> getFromages() {
-        return List.of(getFromage(),getFromage(),getFromage());
-    }
+    private List<Fromage> fromages =  List.of(fromage,fromage,fromage);
 }

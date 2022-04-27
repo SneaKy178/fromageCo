@@ -3,6 +3,7 @@ package com.mfelton.Controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mfelton.Service.ClientService;
+import com.mfelton.Service.PaiementService;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
 import com.mfelton.model.Panier;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,9 @@ public class ClientControllerTest {
     @MockBean
     private ClientService clientService;
 
+    @MockBean
+    private PaiementService paiementService;
+
     private final ObjectMapper mapper;
 
     public ClientControllerTest() {
@@ -46,7 +52,7 @@ public class ClientControllerTest {
     @Test
     public void testAddClient() throws Exception {
         // Arrange
-        Client expected = getClient();
+        Client expected = client;
         when(clientService.addClient(expected)).thenReturn(Optional.of(expected));
 
         // Act
@@ -68,7 +74,7 @@ public class ClientControllerTest {
     @Test
     void testGetAllClients() throws Exception {
         // Arrange
-        List<Client> expected = getClients();
+        List<Client> expected = clients;
         when(clientService.getAllClients()).thenReturn(expected);
 
         // Act
@@ -87,24 +93,10 @@ public class ClientControllerTest {
     }
 
 
+    private Panier panier = new Panier(0,0, Collections.emptyList());
 
+    private Client client = new Client("Prenom","Nom","prenom@email.com","password","adresse","telephone","province","ville", panier);
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
-
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
-
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
-
-    private Client getClient() {
-        return new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-    }
-
-    private List<Client> getClients(){
-        return List.of(getClient(),getClient(),getClient());
-    }
+    private List<Client> clients = List.of(client,client,client);
 
 }

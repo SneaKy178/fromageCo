@@ -29,7 +29,7 @@ public class PanierServiceTest {
     @Test
     public void testAddPanier() {
         // Arrange
-        Panier expected = getPanier();
+        Panier expected = panier;
         when(panierRepository.save(expected)).thenReturn(expected);
 
         // Act
@@ -42,8 +42,7 @@ public class PanierServiceTest {
     @Test
     public void testGetAllPaniers() {
         // Arrange
-        List<Panier> expected =
-                getPaniers();
+        List<Panier> expected = paniers;
         when(panierRepository.findAll()).thenReturn(expected);
 
         // Act
@@ -57,19 +56,10 @@ public class PanierServiceTest {
 
     Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
 
-    private List<Fromage> getFromages() {
-        return List.of(fromage,fromage,fromage);
-    }
+    private List<Fromage> fromages = List.of(fromage,fromage,fromage);
 
-    private Panier getPanier() {
-        return new Panier(0,0,getFromages());
-    }
+    private Panier panier = new Panier(0,0,fromages);
 
-    Client client = new Client("Mathieu","Felton","test@gmail.com","Test1234","123 rue test","51484593848","Quebec","Montreal",getPanier());
-
-
-    private List<Panier> getPaniers() {
-        return List.of(getPanier(),getPanier(),getPanier());
-    }
+    private List<Panier> paniers = List.of(panier,panier,panier);
 
 }
