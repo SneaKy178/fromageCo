@@ -65,7 +65,7 @@ public class PanierControllerTest {
     }
 
     @Test
-    void testGetAllPanier() throws Exception {
+    void testGetAllPaniers() throws Exception {
         // Arrange
         List<Panier> expected = paniers;
         when(panierService.getAllPaniers()).thenReturn(expected);

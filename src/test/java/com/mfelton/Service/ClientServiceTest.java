@@ -3,6 +3,7 @@ package com.mfelton.Service;
 import com.mfelton.Repository.ClientRepository;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ClientServiceTest {
@@ -53,6 +55,20 @@ public class ClientServiceTest {
         // Assert
         assertThat(returned)
                 .hasSize(3);
+    }
+
+    @Test
+    void testDeleteClient() {
+        // Arrange
+        Client expected = client;
+        expected.setId(1);
+        doNothing().when(clientRepository).deleteById(anyInt());
+
+        // Act
+        clientService.deleteClient(expected.getId());
+
+        // Assert
+        verify(clientRepository).deleteById(anyInt());
     }
 
 

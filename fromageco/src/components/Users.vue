@@ -1,4 +1,6 @@
 <template>
+  <div v-if="state.isLoggedIn && state.role == 'ADMINISTRATEUR'">
+    <div v-if="listUsers.length > 0">
   <table class="table table-dark">
   <thead>
     <tr>
@@ -13,10 +15,15 @@
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
       <td>{{user.courriel}}</td>
-      <td> <button>Enlever</button></td>
+      <td> <button @click="removeClient(user)">Enlever</button></td>
     </tr>
   </tbody>
 </table>
+  </div>
+      <div v-else class=" d-flex justify-content-center mt-4">
+        <h2 >La liste est vide</h2>
+      </div>
+  </div>
   
 </template>
 
@@ -42,6 +49,12 @@ export default {
           this.listUsers = data;
       });
     },
+    removeClient(user) {
+      fetch(`http://localhost:9191/client/delete/${user.id}`, {method: 'DELETE'})
+        .then(async () => {
+          await this.fetchData();
+        })
+      },
   },
 };
 </script>

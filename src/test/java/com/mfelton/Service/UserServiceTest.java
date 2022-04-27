@@ -47,6 +47,20 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testFindClientByEmail() {
+        // Arrange
+        Client expected = client;
+        when(clientRepository.findClientByCourrielIgnoreCase(expected.getCourriel()))
+                .thenReturn(expected);
+
+        // Act
+        Optional<User> returned = userService.findUserByCourriel(expected.getCourriel());
+
+        // Assert
+        assertThat(returned).isEqualTo(Optional.of(expected));
+    }
+
+    @Test
     public void testLoginAdministrateur() {
         // Arrange
         Administrateur expected = administrateur;
@@ -58,20 +72,6 @@ public class UserServiceTest {
 
         // Act
         Optional<User> returned = userService.login(expected.getCourriel(), expected.getPassword());
-
-        // Assert
-        assertThat(returned).isEqualTo(Optional.of(expected));
-    }
-
-    @Test
-    public void testFindClientByEmail() {
-        // Arrange
-        Client expected = client;
-        when(clientRepository.findClientByCourrielIgnoreCase(expected.getCourriel()))
-                .thenReturn(expected);
-
-        // Act
-        Optional<User> returned = userService.findUserByCourriel(expected.getCourriel());
 
         // Assert
         assertThat(returned).isEqualTo(Optional.of(expected));

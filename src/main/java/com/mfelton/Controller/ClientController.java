@@ -32,6 +32,12 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAllClients(), HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/client/delete/{id}")
+    public ResponseEntity deleteClient(@PathVariable int id) {
+        clientService.deleteClient(id);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 }

@@ -1,6 +1,8 @@
 package com.mfelton.model;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +23,7 @@ public class Paiement implements Serializable {
     private String codePostale;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Client client;
 
     public Paiement(){}

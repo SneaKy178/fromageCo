@@ -6,6 +6,7 @@ import com.mfelton.Service.ClientService;
 import com.mfelton.Service.PaiementService;
 import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
+import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @ContextConfiguration(classes = ClientController.class)
 @WebMvcTest(ClientController.class)
@@ -90,6 +92,20 @@ public class ClientControllerTest {
         var actualClients = mapper.readValue(result.getResponse().getContentAsString(), List.class);
         assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(actualClients.size()).isEqualTo(expected.size());
+    }
+
+    @Test
+    void testDeleteClient() throws Exception {
+        // Arrange
+        Client expected = new Client();
+        expected.setId(1);
+        doNothing().when(clientService).deleteClient(anyInt());
+
+        // Act
+        MvcResult result = mockMvc.perform(delete("/client/delete/" + expected.getId())).andReturn();
+
+        // Assert
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
 
