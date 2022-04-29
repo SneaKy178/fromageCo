@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import { ref } from "vue";
 import global from "./global";
 export default {
@@ -62,6 +63,8 @@ export default {
         });
     },
     addPanier(item) {
+
+      
         const listItem = []
         listItem.push(item)
 
@@ -76,6 +79,13 @@ export default {
         newPanier.prixTotal += this.fullUser.panier.prixTotal
         newPanier.listeFromages.push(...this.fullUser.panier.listeFromages)
 
+        Swal.fire({
+              title: "Success",
+              text: "Ce fromage est ajouté à votre panier",
+              icon: "success",
+              confirmButtonText: "ok",
+    })
+
           fetch("http://localhost:9191/panier", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -85,8 +95,10 @@ export default {
               await this.fetchData()
           });
 
+      
+  }
     }
-}
+    
 }
 </script>
 

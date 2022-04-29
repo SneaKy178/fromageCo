@@ -29,6 +29,9 @@
       <li class="nav-item active">
         <router-link to="/fromages" class="link">Liste des fromages</router-link>
       </li>
+      <li class="nav-item active">
+        <router-link to="/adminPaiements" class="link">Liste des paiements</router-link>adminPaiements
+      </li>
     </ul>
   </div>
   </div>

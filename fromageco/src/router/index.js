@@ -8,6 +8,7 @@ import PleaseLogin from '../components/PleaseLogin.vue'
 import NewPaiement from '../components/NewPaiement.vue'
 import Users from '../components/Users.vue'
 import Fromages from '../components/Fromages.vue'
+import AdminPaiement from '../components/AdminPaiements.vue'
 
 const routes = [
   {
@@ -49,6 +50,10 @@ const routes = [
   {
     path:"/fromages",
     component: Fromages
+  },
+  {
+    path:"/adminPaiements",
+    component: AdminPaiement
   }
 ];
 

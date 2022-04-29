@@ -59,11 +59,11 @@ public class FromageCoApplication implements CommandLineRunner {
         Client client2 = new Client("Mathieu","Felton","mathieu@gmail.com","Password1","111 street","514-232-2323","Québec","Montreal",panier2);
         clientRepository.save(client2);
 
-        Paiement paiement = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
+        Paiement paiement = new Paiement("Master Card",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
         paiementRepository.save(paiement);
-        Paiement paiement1 = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
+        Paiement paiement1 = new Paiement("Master Card",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
         paiementRepository.save(paiement1);
-        Paiement paiement2 = new Paiement("Master Crd",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
+        Paiement paiement2 = new Paiement("Master Card",1111111111111111L,"01/11","Mathieu Felton",111,"J1J1S1",client);
         paiementRepository.save(paiement2);
 
         Administrateur administrateur = new Administrateur("Eric","Felton","eric@gmail.com","Password1","Programmeur sénior");
