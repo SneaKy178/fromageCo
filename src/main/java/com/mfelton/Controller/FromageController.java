@@ -2,12 +2,14 @@ package com.mfelton.Controller;
 
 import com.mfelton.Repository.FromageRepository;
 import com.mfelton.Service.FromageService;
+import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.From;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,6 +26,14 @@ public class FromageController {
     public FromageController(FromageService fromageService, FromageRepository fromageRepository) {
         this.fromageService = fromageService;
         this.fromageRepository = fromageRepository;
+    }
+
+    @PostMapping(path = "/fromage")
+    public ResponseEntity<Fromage> createClient(@RequestBody Fromage fromage){
+        return fromageService
+                .addFromage(fromage)
+                .map(fromage1 -> ResponseEntity.status(HttpStatus.CREATED).body(fromage1))
+                .orElse(ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @GetMapping(path = "/fromages")

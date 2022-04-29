@@ -30,7 +30,10 @@
         <router-link to="/fromages" class="link">Liste des fromages</router-link>
       </li>
       <li class="nav-item active">
-        <router-link to="/adminPaiements" class="link">Liste des paiements</router-link>adminPaiements
+        <router-link to="/adminPaiements" class="link">Liste des paiements</router-link>
+      </li>
+      <li class="nav-item active">
+        <router-link to="/adminAjoutFromage" class="link">Ajouter un fromage</router-link>
       </li>
     </ul>
   </div>

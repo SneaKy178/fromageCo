@@ -9,6 +9,7 @@ import NewPaiement from '../components/NewPaiement.vue'
 import Users from '../components/Users.vue'
 import Fromages from '../components/Fromages.vue'
 import AdminPaiement from '../components/AdminPaiements.vue'
+import AdminAjoutFromage from '../components/AdminAjoutFromage.vue'
 
 const routes = [
   {
@@ -54,6 +55,10 @@ const routes = [
   {
     path:"/adminPaiements",
     component: AdminPaiement
+  },
+  {
+    path:"/adminAjoutFromage",
+    component: AdminAjoutFromage
   }
 ];
 

@@ -24,13 +24,20 @@
         <h2 >La liste est vide</h2>
       </div>
   </div>
+  <div v-else>
+    <PleaseLogin/>
+  </div>
   
 </template>
 
 <script>
+import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
+  components: {
+    PleaseLogin
+  },
   setup() {
     const { state } = global;
     const listUsers = ref({});

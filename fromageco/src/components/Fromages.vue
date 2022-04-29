@@ -33,7 +33,7 @@ import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
 export default {
-    components: {
+  components: {
     PleaseLogin
   },
   setup() {
