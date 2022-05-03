@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th>Nom</th>
+      <th>Prix</th>
       <th>Description</th>
       <th>Enlever de la liste</th>
     </tr>
@@ -12,6 +13,7 @@
   <tbody>
     <tr v-for="fromage in listFromages" v-bind:key="fromage">
       <td>{{fromage.nom}}</td>
+      <td>{{fromage.prix}}$</td>
       <td>{{fromage.description}}</td>
       <td> <button @click="removeFromage(fromage)">Enlever</button></td>
     </tr>
@@ -70,7 +72,6 @@ table {
 }
 
 
-
 #routerButton {
   background: #0b6dff;
   border: 0;
@@ -80,5 +81,4 @@ table {
   border-radius: 20px;
   font-size: 16px;
 }
-
 </style>

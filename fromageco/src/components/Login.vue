@@ -1,4 +1,7 @@
 <template>
+
+  <h1>Fromage&Co</h1>
+  <p>Allez-vous feta ce soir?</p>
    
   <form @submit.prevent="handleSubmit" class="center">
     <label>Courriel : </label>
@@ -129,9 +132,10 @@ button {
 }
 .center {
   width: 400px;
-  left: 50%;
   position: absolute;
-  transform: translate(-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 #inscription {
   left: 50%;
@@ -146,5 +150,16 @@ button {
   font-weight: bold;
   margin-top: 20px;
   font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 60px;
+}
+
+p {
+  text-align: center;
+  font-size: 25px;
 }
 </style>

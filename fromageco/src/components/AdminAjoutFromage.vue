@@ -14,11 +14,10 @@
         <input type="text" required v-model="nom" />
 
         <label>Prix : </label>
-        <input type="text" required v-model="prix" />
+        <input type="number" required v-model="prix" />
 
         <label>Description : </label>
         <textarea type="textarea" required v-model="description" rows="4" cols="50"/>
-
 
         <div class="submit">
             <button>Ajouter ce fromage à la liste</button>
@@ -84,6 +83,13 @@ export default {
           data: rawImg.substring(rawImg.indexOf(',') + 1)
         });
 
+            this.nom = ""
+            this.prix = ""
+            this.description = ""
+            this.quatiteDispnible = ""
+            this.data = ""
+            this.fileName = ""
+
         request.send(fromage);
 
         }
@@ -109,7 +115,7 @@ export default {
     transition: .3s ease all;
 
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 80px;
 }
 
 .dropzone label {
