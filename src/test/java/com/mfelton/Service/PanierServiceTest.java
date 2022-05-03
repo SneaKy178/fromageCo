@@ -54,7 +54,7 @@ public class PanierServiceTest {
     }
 
 
-    Fromage fromage = new Fromage("Chevre",12.95,"test",100, Base64.getDecoder().decode("test"));
+    Fromage fromage = new Fromage("Chevre",12.95,"test", Base64.getDecoder().decode("test"));
 
     private List<Fromage> fromages = List.of(fromage,fromage,fromage);
 

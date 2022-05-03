@@ -42,7 +42,7 @@ export default {
             return res.json();
           } else if (!res.ok) {
             Swal.fire({
-              title: "Error!",
+              title: "Erreur!",
               text: "Le courriel ou le mot de passe est invalide.",
               icon: "error",
               confirmButtonText: "ok",

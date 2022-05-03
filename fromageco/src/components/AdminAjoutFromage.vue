@@ -19,8 +19,6 @@
         <label>Description : </label>
         <textarea type="textarea" required v-model="description" rows="4" cols="50"/>
 
-        <label>Quantite disponible : </label>
-        <input type="text" required v-model="quatiteDispnible" />
 
         <div class="submit">
             <button>Ajouter ce fromage à la liste</button>
@@ -83,7 +81,6 @@ export default {
           nom: this.nom,
           prix: this.prix,
           description: this.description,
-          quatiteDispnible: this.quatiteDispnible,
           data: rawImg.substring(rawImg.indexOf(',') + 1)
         });
 
@@ -182,5 +179,6 @@ button {
   color: white;
   border-radius: 20px;
   font-size: 16px;
+  margin-left: 22%;
 }
 </style>
