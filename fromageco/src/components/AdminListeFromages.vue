@@ -21,7 +21,7 @@
 </table>
     </div>
     <div v-else class=" d-flex justify-content-center mt-4">
-      <h2>Il n'y a auncun fromage disponible présentement</h2>
+      <h2>Il n'y a aucun fromage disponible présentement</h2>
     </div>
     </div>
   <div v-else>

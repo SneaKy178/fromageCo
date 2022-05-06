@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import PleaseLogin from "./PleaseLogin.vue"
 import { ref } from "vue";
 import global from "./global";
@@ -136,6 +137,13 @@ export default {
                 this.detenteur = ""
                 this.cvv = ""
                 this.codePostale = ""
+
+                Swal.fire({
+                  title: "Succès!",
+                  text: "Vous avez ajouté une méthode de paiement à votre compte.",
+                  icon: "success",
+                  confirmButtonText: "ok",
+                });
           });
       },
       addPanier(paiement) {

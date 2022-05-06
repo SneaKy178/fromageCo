@@ -5,9 +5,9 @@ import AccountDetails from '../components/AccountDetails.vue'
 import Items from '../components/Items.vue'
 import Panier from '../components/Panier.vue'
 import PleaseLogin from '../components/PleaseLogin.vue'
-import NewPaiement from '../components/NewPaiement.vue'
-import Users from '../components/Users.vue'
-import Fromages from '../components/Fromages.vue'
+import Paiement from '../components/Paiement.vue'
+import AdminListeClients from '../components/AdminListeClients.vue'
+import AdminListeFromages from '../components/AdminListeFromages.vue'
 import AdminPaiement from '../components/AdminPaiements.vue'
 import AdminAjoutFromage from '../components/AdminAjoutFromage.vue'
 
@@ -42,15 +42,15 @@ const routes = [
   },
   {
     path:"/paiement",
-    component: NewPaiement
+    component: Paiement
   },
   {
     path:"/users",
-    component: Users
+    component: AdminListeClients
   },
   {
     path:"/fromages",
-    component: Fromages
+    component: AdminListeFromages
   },
   {
     path:"/adminPaiements",

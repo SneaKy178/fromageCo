@@ -1,4 +1,6 @@
 <template>
+  <div v-if="state.isLoggedIn && state.role == 'ADMINISTRATEUR'">
+
     <div class="dropzone center" @change="selectedFile">
         <span>Veuillez sélectionner une image</span>
         <label for="dropzoneFile">Select File</label>
@@ -14,7 +16,7 @@
         <input type="text" required v-model="nom" />
 
         <label>Prix : </label>
-        <input type="number" required v-model="prix" />
+        <input type="number" required v-model="prix" min="1" />
 
         <label>Description : </label>
         <textarea type="textarea" required v-model="description" rows="4" cols="50"/>
@@ -23,15 +25,24 @@
             <button>Ajouter ce fromage à la liste</button>
       </div>
 
-
     </form>
+</div>
+<div v-else>
+    <PleaseLogin/>
+</div>
     
 </template>
 
 
 <script>
+import PleaseLogin from "./PleaseLogin.vue"
+import Swal from "sweetalert2";
 import { ref } from "vue";
+import global from "./global";
 export default {
+    components: {
+     PleaseLogin
+  },
     setup() {
         const fileName = ref("");
 
@@ -39,10 +50,9 @@ export default {
             fileName.value = document.querySelector("#dropzoneFile").files[0]
         }
         
+        const { state } = global;
 
-        return {fileName,selectedFile};
-
-        
+        return {fileName,selectedFile,state};
     },
     data() {
         return {
@@ -63,9 +73,6 @@ export default {
           "Content-Type",
           "application/json; charset=UTF-8"
         );
-
-
-
 
     const file = document.querySelector("#dropzoneFile").files[0]
     const reader = new FileReader()
@@ -89,6 +96,13 @@ export default {
             this.quatiteDispnible = ""
             this.data = ""
             this.fileName = ""
+
+            Swal.fire({
+              title: "Succès!",
+              text: "Ce fromage est ajouté à la liste des fromages",
+              icon: "success",
+              confirmButtonText: "ok",
+            });
 
         request.send(fromage);
 

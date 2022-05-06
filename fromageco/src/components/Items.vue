@@ -78,7 +78,7 @@ export default {
         newPanier.listeFromages.push(...this.fullUser.panier.listeFromages)
 
         Swal.fire({
-              title: "Success",
+              title: "Succès!",
               text: "Ce fromage est ajouté à votre panier",
               icon: "success",
               confirmButtonText: "ok",
