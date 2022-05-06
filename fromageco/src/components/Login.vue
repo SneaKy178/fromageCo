@@ -154,7 +154,7 @@ button {
 
 h1 {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 70px;
   font-size: 60px;
 }
 

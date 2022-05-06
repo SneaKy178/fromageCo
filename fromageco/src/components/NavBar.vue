@@ -16,7 +16,7 @@
       <div v-if="state.isLoggedIn && state.role == 'CLIENT'">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/items" class="link">Items</router-link>
+            <router-link to="/items" class="link">Fromages</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/paiement" class="link">Paiement</router-link>

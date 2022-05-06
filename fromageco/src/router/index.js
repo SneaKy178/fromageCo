@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import FormClient from '../components/FormClient.vue'
 import Login from '../components/Login.vue'
 import AccountDetails from '../components/AccountDetails.vue'
-import Items from '../components/Items.vue'
+import Fromages from '../components/Fromages.vue'
 import Panier from '../components/Panier.vue'
 import PleaseLogin from '../components/PleaseLogin.vue'
 import Paiement from '../components/Paiement.vue'
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path:"/items",
-    component: Items
+    component: Fromages
   },
   {
     path:"/panier",
