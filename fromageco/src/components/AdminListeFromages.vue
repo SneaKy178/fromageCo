@@ -7,7 +7,7 @@
       <th>Nom</th>
       <th>Prix</th>
       <th>Description</th>
-      <th>Enlever de la liste</th>
+      <th>Effacer de la liste</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,7 @@
       <td>{{fromage.nom}}</td>
       <td>{{fromage.prix}}$</td>
       <td>{{fromage.description}}</td>
-      <td> <button @click="removeFromage(fromage)">Enlever</button></td>
+      <td> <button @click="removeFromage(fromage)">Effacer</button></td>
     </tr>
   </tbody>
 </table>

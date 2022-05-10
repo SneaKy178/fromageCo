@@ -7,7 +7,7 @@
       <th>Nom</th>
       <th>Description</th>
       <th>Nom du client</th>
-      <th>Enlever de la liste</th>
+      <th>Effacer de la liste</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,7 @@
       <td>{{paiement.marque}}</td>
       <td>{{paiement.numCarte}}</td>
       <td>{{paiement.client.prenom}} {{paiement.client.nom}}</td>
-      <td> <button @click="removePaiement(paiement)">Enlever</button></td>
+      <td> <button @click="removePaiement(paiement)">Effacer</button></td>
     </tr>
   </tbody>
 </table>

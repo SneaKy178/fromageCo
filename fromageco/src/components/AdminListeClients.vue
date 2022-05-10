@@ -7,7 +7,7 @@
       <th>Prenom</th>
       <th>Nom</th>
       <th>Courriel</th>
-      <th>Enlever de la liste</th>
+      <th>Effacer de la liste</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +15,7 @@
       <td>{{user.prenom}}</td>
       <td>{{user.nom}}</td>
       <td>{{user.courriel}}</td>
-      <td> <button @click="removeClient(user)">Enlever</button></td>
+      <td> <button @click="removeClient(user)">Effacer</button></td>
     </tr>
   </tbody>
 </table>
