@@ -1,6 +1,5 @@
 package com.mfelton.Controller;
 
-import com.mfelton.Repository.PaiementRepository;
 import com.mfelton.Service.ClientService;
 import com.mfelton.model.Client;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,7 @@ public class ClientController {
     }
 
     @PostMapping(path = "/client")
-    public ResponseEntity<Client> createClient(@RequestBody Client client){
+    public ResponseEntity<Client> addClient(@RequestBody Client client) {
         return clientService
                 .addClient(client)
                 .map(client1 -> ResponseEntity.status(HttpStatus.CREATED).body(client1))
@@ -37,7 +36,6 @@ public class ClientController {
         clientService.deleteClient(id);
         return ResponseEntity.ok().build();
     }
-
 
 
 }

@@ -1,7 +1,6 @@
 package com.mfelton.Controller;
 
 import com.mfelton.Service.PanierService;
-import com.mfelton.model.Client;
 import com.mfelton.model.Panier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class PanierController {
     }
 
     @PostMapping(path = "/panier")
-    public ResponseEntity<Panier> createPanier(@RequestBody Panier panier){
+    public ResponseEntity<Panier> addPanier(@RequestBody Panier panier) {
         return panierService
                 .addPanier(panier)
                 .map(panier1 -> ResponseEntity.status(HttpStatus.CREATED).body(panier1))

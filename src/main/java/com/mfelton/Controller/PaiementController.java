@@ -1,7 +1,6 @@
 package com.mfelton.Controller;
 
 import com.mfelton.Service.PaiementService;
-import com.mfelton.model.Client;
 import com.mfelton.model.Paiement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public class PaiementController {
     }
 
     @PostMapping(path = "/paiement")
-    public ResponseEntity<Paiement> createPaiement(@RequestBody Paiement paiement){
+    public ResponseEntity<Paiement> addPaiement(@RequestBody Paiement paiement) {
         return paiementService
                 .addPaiement(paiement)
                 .map(paiement1 -> ResponseEntity.status(HttpStatus.CREATED).body(paiement1))
@@ -34,7 +33,7 @@ public class PaiementController {
 
     @GetMapping(path = "/paiement/{email}")
     public ResponseEntity<List<Paiement>> findPaimentByCourriel(@PathVariable("email") String email) {
-        return new ResponseEntity<>(paiementService.findPaiementByCourriel(email),HttpStatus.OK);
+        return new ResponseEntity<>(paiementService.findPaiementByCourriel(email), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/paiement/delete/{id}")

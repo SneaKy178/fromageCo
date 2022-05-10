@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mfelton.Service.PaiementService;
 import com.mfelton.model.Client;
-import com.mfelton.model.Fromage;
 import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

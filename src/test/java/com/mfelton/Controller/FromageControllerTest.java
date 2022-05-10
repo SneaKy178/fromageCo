@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mfelton.Repository.FromageRepository;
 import com.mfelton.Service.FromageService;
 import com.mfelton.model.Fromage;
-import com.mfelton.model.Paiement;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,13 +17,13 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @ContextConfiguration(classes = FromageController.class)
 @WebMvcTest(FromageController.class)
@@ -45,6 +44,28 @@ public class FromageControllerTest {
     public FromageControllerTest() {
         this.mapper = new ObjectMapper().findAndRegisterModules();
         this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    @Test
+    public void testAddFromage() throws Exception {
+        // Arrange
+        Fromage expected = fromage;
+        when(fromageService.addFromage(expected)).thenReturn(Optional.of(expected));
+
+        // Act
+        MvcResult result =
+                mockMvc
+                        .perform(
+                                post("/fromage")
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .content(mapper.writeValueAsString(expected)))
+                        .andReturn();
+
+        // Assert
+        var actualFromage =
+                mapper.readValue(result.getResponse().getContentAsString(), Fromage.class);
+        assertThat(result.getResponse().getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(actualFromage).isEqualTo(expected);
     }
 
     @Test

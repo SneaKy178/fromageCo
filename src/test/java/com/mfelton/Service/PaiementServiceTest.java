@@ -2,7 +2,6 @@ package com.mfelton.Service;
 
 import com.mfelton.Repository.PaiementRepository;
 import com.mfelton.model.Client;
-import com.mfelton.model.Fromage;
 import com.mfelton.model.Paiement;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

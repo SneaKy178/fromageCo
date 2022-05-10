@@ -1,9 +1,7 @@
 package com.mfelton.Service;
 
 import com.mfelton.Repository.FromageRepository;
-import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
-import com.mfelton.model.Paiement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -25,6 +24,19 @@ public class FromageServiceTest {
 
     @InjectMocks
     private FromageService fromageService;
+
+    @Test
+    public void testAddFromage() {
+        // Arrange
+        Fromage expected = fromage;
+        when(fromageRepository.save(expected)).thenReturn(expected);
+
+        // Act
+        Optional<Fromage> returned = fromageService.addFromage(expected);
+
+        // Assert
+        assertThat(returned).isEqualTo(Optional.of(expected));
+    }
 
 
     @Test

@@ -1,7 +1,6 @@
 package com.mfelton.Service;
 
 import com.mfelton.Repository.PanierRepository;
-import com.mfelton.model.Client;
 import com.mfelton.model.Fromage;
 import com.mfelton.model.Panier;
 import org.junit.jupiter.api.Test;

@@ -12,8 +12,8 @@ public class Administrateur extends User implements Serializable {
 
     private String titre;
 
-    public Administrateur(String prenom, String nom, String courriel, String password,String titre) {
-        super(prenom,nom,courriel,password,UserRole.ADMINISTRATEUR);
+    public Administrateur(String prenom, String nom, String courriel, String password, String titre) {
+        super(prenom, nom, courriel, password, UserRole.ADMINISTRATEUR);
         this.titre = titre;
     }
 

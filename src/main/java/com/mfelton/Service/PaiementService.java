@@ -1,7 +1,6 @@
 package com.mfelton.Service;
 
 import com.mfelton.Repository.PaiementRepository;
-import com.mfelton.model.Client;
 import com.mfelton.model.Paiement;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class PaiementService {
         this.paiementRepository = paiementRepository;
     }
 
-    public Optional<Paiement> addPaiement(Paiement paiement){
+    public Optional<Paiement> addPaiement(Paiement paiement) {
         return Optional.of(paiementRepository.save(paiement));
     }
 

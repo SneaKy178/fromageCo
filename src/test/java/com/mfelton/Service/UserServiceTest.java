@@ -2,16 +2,17 @@ package com.mfelton.Service;
 
 import com.mfelton.Repository.AdministrateurRepository;
 import com.mfelton.Repository.ClientRepository;
-import com.mfelton.model.*;
+import com.mfelton.model.Administrateur;
+import com.mfelton.model.Client;
+import com.mfelton.model.Panier;
+import com.mfelton.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Base64;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

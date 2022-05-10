@@ -1,7 +1,6 @@
 package com.mfelton.model;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,10 +20,13 @@ public class Panier implements Serializable {
     @OneToMany
     private List<Fromage> listeFromages;
 
-    public Panier(){}
+    public Panier() {
+    }
+
     public Panier(int nbrFromage, double prixTotal, List<Fromage> listeFromages) {
         this.nbrFromage = nbrFromage;
         this.prixTotal = prixTotal;
-        this.listeFromages = listeFromages;}
+        this.listeFromages = listeFromages;
+    }
 
 }

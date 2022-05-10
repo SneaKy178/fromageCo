@@ -16,7 +16,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Optional<Client> addClient(Client client){
+    public Optional<Client> addClient(Client client) {
         return Optional.of(clientRepository.save(client));
     }
 
@@ -27,7 +27,6 @@ public class ClientService {
     public void deleteClient(int id) {
         clientRepository.deleteById(id);
     }
-
 
 
 }

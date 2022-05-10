@@ -20,7 +20,8 @@ public class Fromage implements Serializable {
     @Lob
     private byte[] data;
 
-    public Fromage(){}
+    public Fromage() {
+    }
 
     public Fromage(String nom, double prix, String description, byte[] data) {
         this.nom = nom;

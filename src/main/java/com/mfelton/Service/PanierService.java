@@ -16,14 +16,13 @@ public class PanierService {
         this.panierRepository = panierRepository;
     }
 
-    public Optional<Panier> addPanier(Panier panier){
+    public Optional<Panier> addPanier(Panier panier) {
         return Optional.of(panierRepository.save(panier));
     }
 
     public List<Panier> getAllPaniers() {
         return panierRepository.findAll();
     }
-
 
 
 }
